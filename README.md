@@ -2,3 +2,4 @@
  - created Socket Client
 
 07.03.2022
+ - finish Server Socket
