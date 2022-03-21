@@ -1,13 +1,14 @@
 package Database;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBReader {
     static final String DB_URL = "jdbc:mysql://devel1:3306/Carlos";
 
-    public static List<String> getNewAuftrage() {
+    public static List<String> getNewAuftrage(LocalDate date) {
         List<String> auftraege = new ArrayList<>();
         ArrayList<Integer> produktNr = new ArrayList<>();
         ArrayList<Integer> auftragsNr = new ArrayList<>();
@@ -16,7 +17,7 @@ public class DBReader {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, "root", "the27");
             Statement stmt = conn.createStatement();
-            String getAuftraege = "Select id, produkt_id, produkt_anzahl from Auftrag where status = \"Offen\"";
+            String getAuftraege = "Select id, produkt_id, produkt_anzahl from Auftrag where status = \"Offen\" and eingang >" + date;
 
             ResultSet rs = stmt.executeQuery(getAuftraege);
             while (rs.next()) {
@@ -40,7 +41,7 @@ public class DBReader {
     }
 
     public static void main(String[] args) {
-        List<String> newAuftrage = getNewAuftrage();
+        List<String> newAuftrage = getNewAuftrage(LocalDate.of(2022, 3, 20));
         for (String s : newAuftrage) {
             System.out.println(s);
         }
