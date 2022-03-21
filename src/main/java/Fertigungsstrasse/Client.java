@@ -81,7 +81,7 @@ public class Client {
                             "\n  }" +
                             "\n}";
                     System.out.println(json);
-                    StarteHardware(json);
+//                    StarteHardware(json);
                     while (status.equals("verarbeitung")) {
                         try {
                             Thread.sleep(1);
