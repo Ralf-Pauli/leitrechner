@@ -22,7 +22,6 @@ public class Server {
 
             boolean stop = false;
             String answer = "";
-
             String auftragMsg = "";
 
             PrintWriter output = new PrintWriter(connection.getOutputStream(), true);
@@ -45,6 +44,7 @@ public class Server {
                     auftragMsg = getMessage();
                     System.out.println("Message: " + auftragMsg);
                     output.println(auftragMsg);
+                    output.println(console.readLine());
                 } else if (answer.contains("fehler")) {
                     writeStatus();
                 } else {
