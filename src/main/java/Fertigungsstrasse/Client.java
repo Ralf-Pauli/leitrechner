@@ -58,7 +58,7 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
-        String ip = "10.0.207.13";
+        String ip = "10.0.207.12";
         int port = 43000;
         try {
             Socket clientSocket = new Socket(ip, port);
