@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBReader {
+public class DatabaseManager {
     static final String DB_URL = "jdbc:mysql://devel1:3306/Carlos";
 
     public static List<String> getNewAuftrage(LocalDate date) {
