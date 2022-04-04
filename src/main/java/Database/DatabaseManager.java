@@ -40,11 +40,31 @@ public class DatabaseManager {
         return auftraege;
     }
 
+    public static void setStatus(int id, String status) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, "root", "the27");
+            String sqlQuery = "UPDATE Auftrag SET status = ? WHERE id = ?";
+            PreparedStatement stmt = conn.prepareStatement(sqlQuery);
+
+            stmt.setString(1, status);
+            stmt.setString(2, String.valueOf(id));
+
+
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
+        /*
         List<String> newAuftrage = getNewAuftrage(LocalDate.of(2022, 5, 4));
         for (String s : newAuftrage) {
             System.out.println(s);
-        }
+        }*/
+        setStatus(1, "offen");
     }
 }
 
