@@ -65,7 +65,7 @@ public class Client {
 //        ReadStatus thread = new ReadStatus();
 //        thread.start();
         System.out.println("Does the train come in?");
-        String ip = "10.0.207.13";
+        String ip = "10.0.207.12";
         int port = 43000;
         try {
             Socket clientSocket = new Socket(ip, port);
@@ -96,6 +96,7 @@ public class Client {
                 } catch (IndexOutOfBoundsException iob) {
                     System.out.println("Kein CSV!");
                 }
+                System.out.println(input.readLine());
             }
             input.close();
             output.close();
