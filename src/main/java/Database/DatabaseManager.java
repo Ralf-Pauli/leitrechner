@@ -17,9 +17,9 @@ public class DatabaseManager {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, "root", "the27");
             Statement stmt = conn.createStatement();
-            String getAuftraege = String.format("Select id, produkt_id, produkt_anzahl from Auftrag where status = \"Offen\" and eingang >= '%s'", date.toString());
+            String query = String.format("Select id, produkt_id, produkt_anzahl from Auftrag where status = \"Offen\" and eingang >= '%s'", date.toString());
 
-            ResultSet rs = stmt.executeQuery(getAuftraege);
+            ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 produktNr.add(rs.getInt("produkt_id"));
                 auftragsNr.add(rs.getInt("id"));
