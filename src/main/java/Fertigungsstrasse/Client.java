@@ -30,7 +30,7 @@ public class Client {
         int port = 43000;
         try {
             Socket clientSocket = new Socket(ip, port);
-            BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
+//            BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
             PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             consoleReaderTh console = new consoleReaderTh();

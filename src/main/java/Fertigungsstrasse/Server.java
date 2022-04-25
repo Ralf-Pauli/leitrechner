@@ -31,23 +31,18 @@ public class Server {
             boolean stop = false;
             String answer = "";
             String auftragMsg = "";
+            String oldOrder = "";
 
             PrintWriter output = new PrintWriter(connection.getOutputStream(), true);
             BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
-//            DatabaseThread databaseThread = new DatabaseThread();
-//            databaseThread.start();
-//            databaseThread.setDate(LocalDate.of(2022, 4, 4));
-
             System.out.println("Connected");
             output.println("Server started!");
             LocalDate lastRead = LocalDate.of(2022, 4, 4);
-            int counter = 0;
             while (!stop) {
                 if (orders.size() == 0) {
                     orders = DatabaseManager.getNewAuftrage(lastRead);
                 }
-
                 answer = input.readLine();
                 if (answer == null) {
                     output.println("Bitte Status senden!");
@@ -58,16 +53,11 @@ public class Server {
                     auftragMsg = getMessage();
                     System.out.println("Message: " + auftragMsg);
                     output.println(auftragMsg);
-                    if (counter == 1) {
-                        orders.remove(0);
-                        counter = 0;
-                    }
-                } else if (answer.contains("fehler")) {
-
                 } else {
                     output.println("Nachricht fehlerhaft");
                 }
-                counter++;
+                oldOrder = orders.get(0);
+                orders.remove(0);
             }
 
         } catch (Exception e) {
