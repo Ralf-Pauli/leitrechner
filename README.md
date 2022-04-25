@@ -9,3 +9,6 @@
 
 21.03.2022
  - Getting and Formatting Database Data
+
+25.04.2022
+ - Communication with Fertigungsstraße works 
