@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.security.SignedObject;
 
 public class Client {
     public static String status = "bereit";
     private static String sConsole = "";
+    private static String ip = "10.0.207.12";
+    private static int port = 43000;
 
     public static void setsConsole(String sConsole) {
         Client.sConsole = sConsole;
@@ -26,14 +27,11 @@ public class Client {
     }
 
     public static void main(String[] args) throws IOException {
-        String ip = "10.0.207.12";
-        int port = 43000;
         try {
             Socket clientSocket = new Socket(ip, port);
-            BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
             PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            consoleReaderTh console = new consoleReaderTh();
+            consoleReaderT console = new consoleReaderT();
             console.start();
             while (true) {
                 output.println(status);
@@ -43,13 +41,12 @@ public class Client {
                 }
                 try {
                     String[] splitted = input.readLine().split(";");
+
                     String json = convertJson(splitted);
                     starteHardware(json);
                     output.println(status);
                 } catch (IndexOutOfBoundsException iob) {
-//                    System.out.println("Kein CSV!");
-//                    System.out.println(iob.getMessage());
-                    iob.printStackTrace();
+                    System.out.println("Kein CSV!");
                 }
             }
             input.close();
@@ -68,7 +65,7 @@ public class Client {
     }
 }
 
-class consoleReaderTh extends Thread {
+class consoleReaderT extends Thread {
     @Override
     public void run() {
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
