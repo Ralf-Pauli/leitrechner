@@ -2,6 +2,7 @@ package Fertigungsstrasse;
 
 import Database.DatabaseManager;
 
+import javax.xml.crypto.Data;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -37,7 +38,6 @@ public class Server {
             BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             System.out.println("Connected");
-            output.println("Server started!");
             LocalDate lastRead = LocalDate.of(2022, 4, 4);
             while (!stop) {
                 if (orders.size() == 0) {
@@ -47,14 +47,18 @@ public class Server {
                 if (answer == null) {
                     output.println("Bitte Status senden!");
                 } else if (answer.contains("exit")) {
+                    System.out.println("LOL");
                     stop = true;
-                    output.println("Stop Server");
+
                 } else if (answer.contains("bereit")) {
                     auftragMsg = getMessage();
                     System.out.println("Message: " + auftragMsg);
                     output.println(auftragMsg);
+                    System.out.println(answer);
+                    DatabaseManager.setStatus(answer.split(";")[0],"fertig");
+
                 } else {
-                    output.println("Nachricht fehlerhaft");
+                    continue;
                 }
                 oldOrder = orders.get(0);
                 orders.remove(0);
@@ -81,16 +85,3 @@ public class Server {
         return orders.get(0);
     }
 }
-
-//class DatabaseThread extends Thread {
-//    private LocalDate date;
-//
-//    public void setDate(LocalDate date) {
-//        this.date = date;
-//    }
-//
-//    @Override
-//    public void run() {
-//        Server.setOrders(DatabaseManager.getNewAuftrage(date));
-//    }
-//}

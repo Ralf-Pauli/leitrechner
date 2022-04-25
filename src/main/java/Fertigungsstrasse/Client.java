@@ -1,5 +1,7 @@
 package Fertigungsstrasse;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,13 +19,14 @@ public class Client {
     }
 
     public static String convertJson(String[] splitted) {
-        return "{" +
-                "\n  Auftrag {" +
+        String s =  "{" +
+                "\n  Auftrag: {" +
                 "\n    \"auftragsnr\": \"" + splitted[0] + "\"," +
                 "\n    \"produkt\": \"" + splitted[1] + "\"," +
                 "\n    \"menge\": \"" + splitted[2] + "\"," +
                 "\n  }" +
                 "\n}";
+        return s;
     }
 
     public static void main(String[] args) throws IOException {
@@ -33,9 +36,10 @@ public class Client {
             BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             consoleReaderT console = new consoleReaderT();
             console.start();
+            output.println(status);
             while (true) {
-                output.println(status);
                 if (sConsole.equals("ende")) {
+                    System.out.println("LOL");
                     output.println("exit");
                     break;
                 }
@@ -43,8 +47,12 @@ public class Client {
                     String[] splitted = input.readLine().split(";");
 
                     String json = convertJson(splitted);
+                    JSONObject jsonObject = new JSONObject(json);
+
+                    System.out.println(jsonObject.getJSONObject("Auftrag").getString("auftragsnr")+ ";" + status);
+
                     starteHardware(json);
-                    output.println(status);
+                    output.println(json +";"+ status);
                 } catch (IndexOutOfBoundsException iob) {
                     System.out.println("Kein CSV!");
                 }
@@ -52,6 +60,8 @@ public class Client {
             input.close();
             output.close();
             clientSocket.close();
+            console.stop();
+            System.out.println("Closed");
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -66,11 +76,12 @@ public class Client {
 }
 
 class consoleReaderT extends Thread {
+    private boolean exit = false;
     @Override
     public void run() {
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
         try {
-            while (true) {
+            while (!exit) {
                 Client.setsConsole(console.readLine());
             }
         } catch (IOException e) {
