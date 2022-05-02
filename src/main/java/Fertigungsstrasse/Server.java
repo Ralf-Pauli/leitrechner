@@ -2,7 +2,6 @@ package Fertigungsstrasse;
 
 import Database.DatabaseManager;
 
-import javax.xml.crypto.Data;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,10 +15,6 @@ import java.util.List;
 public class Server {
     private static List<String> orders = new ArrayList<>();
 
-    public static void setOrders(List<String> orders) {
-        Server.orders = orders;
-    }
-
     public static void main(String[] args) {
         Server.openConnection();
     }
@@ -30,9 +25,9 @@ public class Server {
             Socket connection = sv.accept();
 
             boolean stop = false;
-            String answer = "";
-            String auftragMsg = "";
-            String oldOrder = "";
+            String answer;
+            String auftragMsg;
+            String oldOrder;
 
             PrintWriter output = new PrintWriter(connection.getOutputStream(), true);
             BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -55,7 +50,7 @@ public class Server {
                     System.out.println("Message: " + auftragMsg);
                     output.println(auftragMsg);
                     System.out.println(answer);
-                    DatabaseManager.setStatus(answer.split(";")[0],"fertig");
+                    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
 
                 } else {
                     continue;
@@ -69,17 +64,6 @@ public class Server {
         }
 
     }
-
-    public static Socket clOpen(Socket conn, ServerSocket sv) {
-        try {
-            conn = sv.accept();
-            return conn;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
-
 
     public static String getMessage() {
         return orders.get(0);
