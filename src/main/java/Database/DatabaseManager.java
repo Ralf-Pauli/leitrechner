@@ -49,10 +49,8 @@ public class DatabaseManager {
             stmt.setString(1, status);
             stmt.setString(2, id);
 
-
             stmt.executeUpdate();
             stmt.close();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

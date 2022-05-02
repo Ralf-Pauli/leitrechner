@@ -20,13 +20,12 @@ public class Server {
     }
 
     public static void openConnection() {
-        try {
-            ServerSocket sv = new ServerSocket(43000);
+        try (ServerSocket sv = new ServerSocket(43000)) {
             Socket connection = sv.accept();
 
             boolean stop = false;
             String answer;
-            String auftragMsg;
+            String orderMsg;
             String oldOrder;
 
             PrintWriter output = new PrintWriter(connection.getOutputStream(), true);
@@ -42,16 +41,13 @@ public class Server {
                 if (answer == null) {
                     output.println("Bitte Status senden!");
                 } else if (answer.contains("exit")) {
-                    System.out.println("LOL");
                     stop = true;
-
                 } else if (answer.contains("bereit")) {
-                    auftragMsg = getMessage();
-                    System.out.println("Message: " + auftragMsg);
-                    output.println(auftragMsg);
+                    orderMsg = getMessage();
+                    System.out.println("Message: " + orderMsg);
+                    output.println(orderMsg);
                     System.out.println(answer);
                     DatabaseManager.setStatus(answer.split(";")[0], "fertig");
-
                 } else {
                     continue;
                 }
