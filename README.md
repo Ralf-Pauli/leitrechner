@@ -25,4 +25,4 @@
 
 02.05.2022
  - Clean Code
- - Readme
+ - Update Readme
