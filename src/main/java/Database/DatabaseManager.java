@@ -8,6 +8,10 @@ import java.util.List;
 public class DatabaseManager {
     static final String DB_URL = "jdbc:mysql://devel1:3306/Carlos";
 
+    private static Connection openConnection() throws SQLException {
+        return DriverManager.getConnection(DB_URL, "root", "the27");
+    }
+
     public static List<String> getNewAuftrage(LocalDate date) {
         List<String> auftraege = new ArrayList<>();
         ArrayList<Integer> produktNr = new ArrayList<>();
@@ -15,7 +19,7 @@ public class DatabaseManager {
         ArrayList<Integer> anzahl = new ArrayList<>();
 
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, "root", "the27");
+            Connection conn = openConnection();
             Statement stmt = conn.createStatement();
             String query = String.format("Select id, produkt_id, produkt_anzahl from Auftrag where status = \"Offen\" and eingang >= '%s'", date.toString());
 
@@ -42,7 +46,7 @@ public class DatabaseManager {
 
     public static void setStatus(String id, String status) {
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, "root", "the27");
+            Connection conn = openConnection();
             String sqlQuery = "UPDATE Auftrag SET status = ? WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sqlQuery);
 
