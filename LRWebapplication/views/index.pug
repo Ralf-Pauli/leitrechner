@@ -1,0 +1,22 @@
+include head.pug
+
+doctype html 
+html
+  head
+
+    style
+      include style.css
+    meta(name="color-scheme" content="dark light")
+
+h1   Title
+
+div
+  p(id="") Auftragsnummer
+  div
+    input.anrinput(type="text", name="auftragsnr", placeholder="Auftragsnummer eingeben")
+    button.squarebutton(id="indus") Search
+    input(id="myButton" type="button", value="table" onclick="generate_table()")
+    p(id="demo" onclick="myFunction()") Click me.
+    script(type="text/javascript" src="script.js")
+
+    
