@@ -6,18 +6,17 @@ let connection = mysql.createConnection({
     database: 'Carlos'
 });
 
-getData(null, 2, null, "fertig")
-
-var count = 0;
-
+let count = 0;
+getData(null,2,null,"fertig");
 
 function getData(id = null, produkt_id = null, produkt_anzahl = null, status = null) {
+   let results = "";
     connection.connect(function (error) {
         if (error) throw error;
-        var query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
+        let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
 
         if (id !== null) {
-            if (count == 0) {
+            if (count === 0) {
                 query += " Where"
             }
             query += " id = " + mysql.escape(id);
@@ -41,17 +40,16 @@ function getData(id = null, produkt_id = null, produkt_anzahl = null, status = n
             query += " status = " + mysql.escape(status);
         }
 
-        console.log(query);
         connection.query(query, function (err, result, fields) {
             if (err) throw err;
-            console.log(result);
             connection.end();
+            console.log(result);
         });
     });
 }
 
 function check(query) {
-    if (count == 0) {
+    if (count === 0) {
         query += " Where"
     } else {
         query += " and"

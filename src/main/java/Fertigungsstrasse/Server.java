@@ -47,7 +47,7 @@ public class Server {
                     orderMsg = getMessage();
                     System.out.println("Message: " + orderMsg);
                     output.println(orderMsg);
-//                    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+                    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
                 } else if (answer.contains("lauft")){
                     System.out.println("läuft");
                 } else {

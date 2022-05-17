@@ -1,7 +1,7 @@
 var sql = require("./connect.js");
 
 function generate_table() {
-    sql.getData(null, 2, null, "fertig");
+    let data = sql.getData(null, null, null, "fertig");
     // get the reference for the body
     var body = document.getElementsByTagName("body")[0];
 
