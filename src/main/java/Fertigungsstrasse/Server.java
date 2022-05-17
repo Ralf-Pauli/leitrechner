@@ -38,6 +38,7 @@ public class Server {
                     orders = DatabaseManager.getNewAuftrage(lastRead);
                 }
                 answer = input.readLine();
+                System.out.println("Answer: " + answer);
                 if (answer == null) {
                     output.println("Bitte Status senden!");
                 } else if (answer.contains("exit")) {
@@ -46,8 +47,9 @@ public class Server {
                     orderMsg = getMessage();
                     System.out.println("Message: " + orderMsg);
                     output.println(orderMsg);
-                    System.out.println(answer);
-                    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+//                    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+                } else if (answer.contains("lauft")){
+                    System.out.println("läuft");
                 } else {
                     continue;
                 }
