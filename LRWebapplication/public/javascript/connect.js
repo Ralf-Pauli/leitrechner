@@ -58,3 +58,5 @@ function check(query) {
     }
     return query;
 }
+
+module.exports = {getData};
