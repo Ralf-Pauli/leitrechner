@@ -1,10 +1,12 @@
-var sql = require("./connect.js");
+const sql = require('./connect.js');
+const json = "[{id: 30,produkt_id: 2,produkt_anzahl: 2,status: 'fertig'}, {id: 45,produkt_id: 2,produkt_anzahl: 3,status: 'fertig'}]";
+const obj = JSON.parse(json);
+console.log(obj.id)
 
 function generate_table() {
     let data = sql.getData(null, null, null, "fertig");
     // get the reference for the body
     var body = document.getElementsByTagName("body")[0];
-
     // creates a <table> element and a <tbody> element
     if (document.getElementById("datatable") != null) {
         removeElement("datatable");
@@ -22,11 +24,17 @@ function generate_table() {
             // Create a <td> element and a text node, make the text
             // node the contents of the <td>, and put the <td> at
             // the end of the table row
-            var cell = document.createElement("td");
+
+            if (i == 0) {
+                var cell = document.createElement("th");
+            } else {
+                var cell = document.createElement("td");
+            }
             var cellText = document.createTextNode("cell in row " + i + ", column " + j);
             cell.appendChild(cellText);
             row.appendChild(cell);
         }
+
 
         // add the row to the end of the table body
         tblBody.appendChild(row);

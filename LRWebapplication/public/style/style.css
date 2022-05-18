@@ -114,5 +114,15 @@ background-color: #45A29E;
 
 #datatable {
     margin: 5px;
-    background-color: red;
+    background-color: #1F2833;
+    border-color: #0B0C10;
+}
+
+#datatable > th,td {
+    padding: 10px;
+}
+
+th {
+    font-weight: bold;
+    font-size: large;
 }
