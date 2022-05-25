@@ -26,3 +26,10 @@
 02.05.2022
  - Clean Code
  - Update Readme
+
+
+24.05.2022
+ - Verzweiflung
+
+25.05.2022
+- Verzweiflung fortsetzung
