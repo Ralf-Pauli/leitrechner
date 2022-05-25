@@ -23,7 +23,6 @@ function printJson() {
 let count = 0;
 
 let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl = null, status = null) {
-    console.log("Entered function")
     return new Promise((resolve, reject) => {
         connection.connect(function (error) {
             if (error) throw error;

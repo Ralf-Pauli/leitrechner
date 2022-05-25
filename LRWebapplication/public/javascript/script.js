@@ -3,24 +3,28 @@ const json = "[{id: 30,produkt_id: 2,produkt_anzahl: 2,status: 'fertig'}, {id: 4
 //const obj = JSON.parse(json);
 //console.log(obj.id)
 
+sql.getJsonData(151).then((result)=>{
+    console.log(result);
+});
+
 function generate_table(javascript) {
-    let data = sql.getJsonData(151).then(console.log)
+
     // get the reference for the body
-    var body = document.getElementsByTagName("body")[0];
+    let body = document.getElementsByTagName("body")[0];
     // creates a <table> element and a <tbody> element
     if (document.getElementById("datatable") != null) {
         removeElement("datatable");
     }
-    var tbl = document.createElement("table");
+    let tbl = document.createElement("table");
     tbl.setAttribute("id", "datatable")
-    var tblBody = document.createElement("tbody");
+    let tblBody = document.createElement("tbody");
 
     // creating all cells
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
         // creates a table row
-        var row = document.createElement("tr");
+        let row = document.createElement("tr");
 
-        for (var j = 0; j < 2; j++) {
+        for (let j = 0; j < 2; j++) {
             // Create a <td> element and a text node, make the text
             // node the contents of the <td>, and put the <td> at
             // the end of the table row
@@ -30,7 +34,7 @@ function generate_table(javascript) {
             } else {
                 var cell = document.createElement("td");
             }
-            var cellText = document.createTextNode("cell in row " + i + ", column " + j);
+            let cellText = document.createTextNode("cell in row " + i + ", column " + j);
             cell.appendChild(cellText);
             row.appendChild(cell);
         }
@@ -48,12 +52,8 @@ function generate_table(javascript) {
     tbl.setAttribute("border", "2");
 }
 
-function myFunction() {
-    document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-}
-
 function removeElement(id) {
-    var elem = document.getElementById(id);
+    let elem = document.getElementById(id);
     return elem.parentNode.removeChild(elem);
 }
 
