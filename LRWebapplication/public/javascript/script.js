@@ -1,10 +1,10 @@
 const sql = require('./connect.js');
 const json = "[{id: 30,produkt_id: 2,produkt_anzahl: 2,status: 'fertig'}, {id: 45,produkt_id: 2,produkt_anzahl: 3,status: 'fertig'}]";
-const obj = JSON.parse(json);
-console.log(obj.id)
+//const obj = JSON.parse(json);
+//console.log(obj.id)
 
-function generate_table() {
-    let data = sql.getData(null, null, null, "fertig");
+function generate_table(javascript) {
+    let data = sql.getJsonData(151).then(console.log)
     // get the reference for the body
     var body = document.getElementsByTagName("body")[0];
     // creates a <table> element and a <tbody> element
@@ -56,3 +56,6 @@ function removeElement(id) {
     var elem = document.getElementById(id);
     return elem.parentNode.removeChild(elem);
 }
+
+
+module.exports = {generate_table}
