@@ -1,5 +1,3 @@
-const {json} = require('express');
-const script = require('./script')
 let mysql = require('mysql');
 let connection = mysql.createConnection({
     host: 'devel1',
@@ -8,22 +6,13 @@ let connection = mysql.createConnection({
     database: 'Carlos'
 });
 
-
-var data = undefined;
-
-//getData(151, null, null, "offen", convertToJson());
-
 function convertToJson(string) {
     return Object.values(JSON.parse(JSON.stringify(string)));
 }
 
-function printJson() {
-    console.log(convertToJson(data));
-}
-
 let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl = null, status = null) {
     let count = 0;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
 
         if (id !== null) {
@@ -49,8 +38,7 @@ let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl 
             query += " status = " + mysql.escape(status);
         }
 
-        connection.query(query, function (err, result, fields) {
-            if (err) throw err;
+        connection.query(query, function (err, result) {
             try {
                 resolve(convertToJson(result));
             } catch (error) {
