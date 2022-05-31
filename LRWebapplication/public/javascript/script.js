@@ -3,12 +3,11 @@ const json = "[{id: 30,produkt_id: 2,produkt_anzahl: 2,status: 'fertig'}, {id: 4
 //const obj = JSON.parse(json);
 //console.log(obj.id)
 
-sql.getJsonData(151).then((result)=>{
-    console.log(result);
-});
-
-function generate_table(javascript) {
-
+function generate_table() {
+    console.log("lmao")
+    /*sql.getJsonData(151).then((result)=>{
+        console.log(result);
+    });*/
     // get the reference for the body
     let body = document.getElementsByTagName("body")[0];
     // creates a <table> element and a <tbody> element
@@ -57,5 +56,11 @@ function removeElement(id) {
     return elem.parentNode.removeChild(elem);
 }
 
+function getDataGet(){
+    fetch('http://localhost/fetch-json')
+    .then(response => response.json())
+    .then(data => console.log(data));
+}
 
-module.exports = {generate_table}
+
+module.exports = {generate_table, getDataGet}
