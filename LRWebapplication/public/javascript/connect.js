@@ -1,4 +1,4 @@
-const { json } = require('express');
+const {json} = require('express');
 const script = require('./script')
 let mysql = require('mysql');
 let connection = mysql.createConnection({
@@ -10,6 +10,7 @@ let connection = mysql.createConnection({
 
 
 var data = undefined;
+
 //getData(151, null, null, "offen", convertToJson());
 
 function convertToJson(string) {
@@ -20,53 +21,46 @@ function printJson() {
     console.log(convertToJson(data));
 }
 
-let count = 0;
-
 let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl = null, status = null) {
+    let count = 0;
     return new Promise((resolve, reject) => {
-        connection.connect(function (error) {
-            if (error) throw error;
-            let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
+        let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
 
-            if (id !== null) {
-                if (count === 0) {
-                    query += " Where";
-                }
-                query += " id = " + mysql.escape(id);
-                count++;
+        if (id !== null) {
+            query = check(query, count);
+            query += " id = " + mysql.escape(id);
+            count++;
+        }
+
+        if (produkt_id !== null) {
+            query = check(query, count);
+            query += " produkt_id = " + mysql.escape(produkt_id);
+            count++;
+        }
+
+        if (produkt_anzahl !== null) {
+            query = check(query, count);
+            query += " produkt_anzahl = " + mysql.escape(produkt_anzahl);
+            count++;
+        }
+
+        if (status !== null) {
+            query = check(query, count);
+            query += " status = " + mysql.escape(status);
+        }
+
+        connection.query(query, function (err, result, fields) {
+            if (err) throw err;
+            try {
+                resolve(convertToJson(result));
+            } catch (error) {
+                throw error;
             }
-
-            if (produkt_id !== null) {
-                query = check(query);
-                query += " produkt_id = " + mysql.escape(produkt_id);
-                count++;
-            }
-
-            if (produkt_anzahl !== null) {
-                query = check(query);
-                query += " produkt_anzahl = " + mysql.escape(produkt_anzahl);
-                count++;
-            }
-
-            if (status !== null) {
-                query = check(query);
-                query += " status = " + mysql.escape(status);
-            }
-
-            connection.query(query, function (err, result, fields) {
-                if (err) throw err;
-                try {
-                    resolve(convertToJson(result));
-                } catch (error) {
-                    throw error;
-                }
-                connection.end();
-            });
         });
     });
 }
 
-function check(query) {
+function check(query, count) {
     if (count === 0) {
         query += " Where"
     } else {
@@ -75,4 +69,4 @@ function check(query) {
     return query;
 }
 
-module.exports = { getJsonData };
+module.exports = {getJsonData};
