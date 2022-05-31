@@ -24,14 +24,11 @@ let count = 0;
 
 let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl = null, status = null) {
     return new Promise((resolve, reject) => {
-        connection.connect(function (error) {
-            if (error) throw error;
+//        connection.connect(function (error) {
             let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
 
             if (id !== null) {
-                if (count === 0) {
-                    query += " Where";
-                }
+                check(query)
                 query += " id = " + mysql.escape(id);
                 count++;
             }
@@ -63,7 +60,7 @@ let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl 
                 connection.end();
             });
         });
-    });
+//    });
 }
 
 function check(query) {
