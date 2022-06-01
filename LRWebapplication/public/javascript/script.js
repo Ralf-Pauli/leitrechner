@@ -4,16 +4,18 @@ const json = "[{id: 30,produkt_id: 2,produkt_anzahl: 2,status: 'fertig'}, {id: 4
 
 function generate_table(json) {
     // get the reference for the body
-    let auftrag = JSON.parse(json);
+    let auftrag = JSON.parse(JSON.stringify(json));
 
-    // let body = document.getElementsByTagName("body")[0];
+    let body = document.getElementsByTagName("body")[0];
     // creates a <table> element and a <tbody> element
     if (document.getElementById("datatable") != null) {
         removeElement("datatable");
     }
-    // let tbl = document.createElement("table");
+
+    let tbl = document.createElement("table");
     tbl.setAttribute("id", "datatable")
     // let tblBody = document.createElement("tbody");
+    let row = '<tr><td>Auftrags-ID</td><td></td></tr>'
 
     // creating all cells
     for (let i = 0; i < auftrag.length; i++) {
@@ -45,15 +47,15 @@ function generate_table(json) {
 */
 
         // add the row to the end of the table body
-        tblBody.appendChild(row);
+        // tblBody.appendChild(row);
     }
 
     // put the <tbody> in the <table>
-    tbl.appendChild(tblBody);
+    // tbl.appendChild(tblBody);
     // appends <table> into <body>
     body.appendChild(tbl);
     // sets the border attribute of tbl to 2;
-    tbl.setAttribute("border", "2");
+    // tbl.setAttribute("border", "2");
 }
 
 function removeElement(id) {
