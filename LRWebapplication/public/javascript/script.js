@@ -1,25 +1,30 @@
-const sql = require('./connect.js');
 const json = "[{id: 30,produkt_id: 2,produkt_anzahl: 2,status: 'fertig'}, {id: 45,produkt_id: 2,produkt_anzahl: 3,status: 'fertig'}]";
 //const obj = JSON.parse(json);
 //console.log(obj.id)
 
-function generate_table() {
-    console.log("lmao")
-    /*sql.getJsonData(151).then((result)=>{
-        console.log(result);
-    });*/
+function generate_table(json) {
     // get the reference for the body
-    let body = document.getElementsByTagName("body")[0];
+    let auftrag = JSON.parse(json);
+
+    // let body = document.getElementsByTagName("body")[0];
     // creates a <table> element and a <tbody> element
     if (document.getElementById("datatable") != null) {
         removeElement("datatable");
     }
-    let tbl = document.createElement("table");
+    // let tbl = document.createElement("table");
     tbl.setAttribute("id", "datatable")
-    let tblBody = document.createElement("tbody");
+    // let tblBody = document.createElement("tbody");
 
     // creating all cells
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < auftrag.length; i++) {
+        let row = `<tr>
+<td>${auftrag[i].id}</td>
+<td>${auftrag[i].produkt_id}</td>
+<td>${auftrag[i].produkt_anzahl}</td>
+<td>${auftrag[i].status}</td>
+</tr>`
+        tbl.innerHTML += row
+        /*
         // creates a table row
         let row = document.createElement("tr");
 
@@ -37,7 +42,7 @@ function generate_table() {
             cell.appendChild(cellText);
             row.appendChild(cell);
         }
-
+*/
 
         // add the row to the end of the table body
         tblBody.appendChild(row);
@@ -59,8 +64,8 @@ function removeElement(id) {
 function getDataGet(){
     fetch('http://localhost/fetch-json')
     .then(response => response.json())
-    .then(data => console.log(data));
-}
+    .then(data => generate_table(data));
 
+}
 
 module.exports = {generate_table, getDataGet}
