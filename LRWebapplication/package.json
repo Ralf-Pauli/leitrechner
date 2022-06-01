@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "nodemon src/index.js --ext *",
     "start": "node ./bin/www",
-    "watch": "nodemon --ignore public",
-    "devwp": "webpack",
-    "build": "webpack --mode production"
+    "watch": "nodemon --ignore public"
   },
   "keywords": [],
   "author": "",
@@ -26,12 +24,10 @@
     "pug": "^3.0.2",
     "pug-cli": "^1.0.0-alpha6",
     "stream": "0.0.2",
-    "util": "^0.12.4",
-    "webpack": "^5.72.1"
+    "util": "^0.12.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16",
-    "webpack-cli": "^4.9.2"
+    "nodemon": "^2.0.16"
   },
   "description": ""
 }
