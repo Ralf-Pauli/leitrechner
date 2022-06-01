@@ -1,4 +1,5 @@
 function generate_table(json) {
+    console.log(json)
     let jsonObject = JSON.parse(JSON.stringify(json));
 
     // gets body element
@@ -10,13 +11,17 @@ function generate_table(json) {
 
     (document.getElementById("loader")).style.visibility = "visible";
 
-    let tbl = document.createElement("table");
-    tbl.setAttribute("id", "datatable")
-    tbl.setAttribute("class", "styled-table")
-    // let tblBody = document.createElement("tbody");
-    let row = '<tr><th>Auftrags ID</th><th>Produkt ID</th><th>Anzahl</th><th>Status</th></tr>'
-    tbl.innerHTML += row;
+    let table = document.createElement("table");
+    table.setAttribute("id", "datatable")
+    table.setAttribute("class", "styled-table")
 
+    let thead = document.createElement("thead");
+    thead.appendChild()
+    let row = '<tr><th>Auftrags ID</th><th>Produkt ID</th><th>Anzahl</th><th>Status</th></tr>'
+    thead.appendChild(row);
+
+    let tbody = document.createElement("tbody");
+    
     // creating all cells
     for (let i = 0; i < jsonObject.length; i++) {
 
@@ -26,9 +31,11 @@ function generate_table(json) {
             <td>${jsonObject[i].produkt_anzahl}</td>
             <td>${jsonObject[i].status}</td>
             </tr>`
-        tbl.innerHTML += row
+        tbody.innerHTML += row
     }
-    body.appendChild(tbl);
+    table.appendChild(thead)
+    table.appendChild(tbody)
+    body.appendChild(table)
     (document.getElementById("loader")).style.visibility = "hidden";
 }
 
@@ -37,16 +44,21 @@ function removeElement(id) {
     return elem.parentNode.removeChild(elem);
 }
 
-function getOrders(id, pId, pAnz, status) {
-    fetch('http://localhost/getOrders?' + new URLSearchParams({
-        id: id,
-        pId: pId,
-        pAnz: pAnz,
-        status: status
-    }))
+function getOrders() {
+    let params = new URLSearchParams();
+    getValue("id")!=""?params.append("id", getValue("id")):null
+    getValue("pId")!=""?params.append("pId", getValue("pId")):null
+    getValue("pAnz")!=""?params.append("pAnz", getValue("pAnz")):null
+    getValue("status")!=""?params.append("status", getValue("status")):null
+    console.log(params)
+    fetch('http://localhost/getOrders?' + params)
         .then(response => response.json())
         .then(data => generate_table(data));
 
+}
+
+function getValue(id) {
+    return document.getElementById(id).value
 }
 
 module.exports = { generate_table, getOrders }

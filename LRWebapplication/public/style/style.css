@@ -126,15 +126,14 @@ background-color: #45A29E;
     border-radius: 10px;
 }
 
-.styled-table thead tr {
+.styled-table tr:nth-of-type(odd){
     background-color: red;
-    color: #ffffff;
-    text-align: left;
 }
 
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
+    text-align: center;
 }
 
 .styled-table tbody tr {

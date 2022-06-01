@@ -5,8 +5,8 @@ include head.pug
 
 div
   .auftragSearch
-    form(action="javascript:getOrders(id,pId,pAnz,status)")
-      input.searchField(id="id",type="text", name="auftragsnr", placeholder="Auftragsnummer" required)
+    form(action="javascript:getOrders()")
+      input.searchField(id="id",type="text", name="auftragsnr", placeholder="Auftragsnummer")
       input.searchField(id="pId",type="text", name="postleitzahl", placeholder="Produkt Id")
       input.searchField(id="pAnz",type="text", name="postleitzahl", placeholder="Produkt Anzahl")
       input.searchField(id="status",type="text", name="status", placeholder="Status")
