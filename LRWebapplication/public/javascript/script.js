@@ -20,11 +20,11 @@ function generate_table(json) {
     // creating all cells
     for (let i = 0; i < auftrag.length; i++) {
         let row = `<tr>
-<td>${auftrag[i].id}</td>
-<td>${auftrag[i].produkt_id}</td>
-<td>${auftrag[i].produkt_anzahl}</td>
-<td>${auftrag[i].status}</td>
-</tr>`
+                        <td>${auftrag[i].id}</td>
+                        <td>${auftrag[i].produkt_id}</td>
+                        <td>${auftrag[i].produkt_anzahl}</td>
+                        <td>${auftrag[i].status}</td>
+                    </tr>`
         tbl.innerHTML += row
         /*
         // creates a table row
@@ -63,11 +63,16 @@ function removeElement(id) {
     return elem.parentNode.removeChild(elem);
 }
 
-function getDataGet(){
-    fetch('http://localhost/fetch-json')
-    .then(response => response.json())
-    .then(data => generate_table(data));
+function getOrders(id, pId, pAnz, status) {
+    fetch('http://localhost/getOrders?' + new URLSearchParams({
+        id: id,
+        pId: pId,
+        pAnz: pAnz,
+        status: status
+    }))
+        .then(response => response.json())
+        .then(data => generate_table(data));
 
 }
 
-module.exports = {generate_table, getDataGet}
+module.exports = { generate_table, getOrders }

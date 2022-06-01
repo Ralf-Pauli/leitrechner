@@ -29,7 +29,10 @@
 
 
 24.05.2022
- - Verzweiflung
+ - Verzweiflung JavaScript Act 1: Der Beginn
 
 25.05.2022
-- Verzweiflung fortsetzung
+ - Verzweiflung JavaScript Act 2: Die Fortsetzung
+
+31.05.2022
+ - Verzweiflung JavaScript Act 3: Das Ende
