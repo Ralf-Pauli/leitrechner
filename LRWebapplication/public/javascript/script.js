@@ -9,16 +9,15 @@ function generate_table(json) {
         removeElement("datatable");
     }
 
-    (document.getElementById("loader")).style.visibility = "visible";
+    
 
     let table = document.createElement("table");
     table.setAttribute("id", "datatable")
     table.setAttribute("class", "styled-table")
 
     let thead = document.createElement("thead");
-    thead.appendChild()
     let row = '<tr><th>Auftrags ID</th><th>Produkt ID</th><th>Anzahl</th><th>Status</th></tr>'
-    thead.appendChild(row);
+    thead.innerHTML += row;
 
     let tbody = document.createElement("tbody");
     
@@ -36,7 +35,6 @@ function generate_table(json) {
     table.appendChild(thead)
     table.appendChild(tbody)
     body.appendChild(table)
-    (document.getElementById("loader")).style.visibility = "hidden";
 }
 
 function removeElement(id) {
