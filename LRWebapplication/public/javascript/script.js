@@ -1,40 +1,32 @@
 function generate_table(json) {
-    console.log(json)
-    let jsonObject = JSON.parse(JSON.stringify(json));
-
-    // gets body element
     let body = document.getElementsByTagName("body")[0];
-    // creates a <table> element and a <tbody> element
+
     if (document.getElementById("datatable") != null) {
         removeElement("datatable");
     }
-
-    
-
     let table = document.createElement("table");
-    table.setAttribute("id", "datatable")
     table.setAttribute("class", "styled-table")
 
-    let thead = document.createElement("thead");
-    let row = '<tr><th>Auftrags ID</th><th>Produkt ID</th><th>Anzahl</th><th>Status</th></tr>'
-    thead.innerHTML += row;
+    // Table Header
+    let thead = table.createTHead();
+    let row = thead.insertRow();
 
-    let tbody = document.createElement("tbody");
-    
-    // creating all cells
-    for (let i = 0; i < jsonObject.length; i++) {
-
-        let row = `<tr>
-            <td>${jsonObject[i].id}</td>
-            <td>${jsonObject[i].produkt_id}</td>
-            <td>${jsonObject[i].produkt_anzahl}</td>
-            <td>${jsonObject[i].status}</td>
-            </tr>`
-        tbody.innerHTML += row
+    for (let jsonElementKey in json[0]) {
+        let cell = row.insertCell();
+        cell.appendChild(document.createTextNode(jsonElementKey))
     }
-    table.appendChild(thead)
-    table.appendChild(tbody)
-    body.appendChild(table)
+
+    // Table Data
+    let tbody = table.createTBody();
+
+    json.forEach(obj => {
+        let row = tbody.insertRow();
+        Object.entries(obj).forEach(([key, value]) => {
+            let cell = row.insertCell();
+            cell.appendChild(document.createTextNode(value.toString()));
+        })
+    });
+    body.appendChild(table);
 }
 
 function removeElement(id) {
