@@ -1,39 +1,44 @@
-/* color pattern 
-black,374045,D89216,E1D89F
-
-alternative:(27323A,435055,29A19C,A3F7BF*/
-
 /* Normalize CSS */
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
-    margin:0;
-    padding:0;
-}
-table {
-    border-collapse:collapse;
-    border-spacing:0;
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
 }
 
-fieldset,img { 
-    border:0;
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
-address,caption,cite,code,dfn,em,strong,th,var {
-    font-style:normal;
-    font-weight:normal;
+
+fieldset, img {
+    border: 0;
 }
-ol,ul {
-    list-style:none;
+
+address, caption, cite, code, dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal;
 }
-caption,th {
-    text-align:left;
+
+ol, ul {
+    list-style: none;
 }
-h1,h2,h3,h4,h5,h6 {
-    font-size:100%;
-    font-weight:normal;
+
+caption, th {
+    text-align: left;
 }
-q:before,q:after {
-    content:'';
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
 }
-abbr,acronym { border:0;}
+
+q:before, q:after {
+    content: '';
+}
+
+abbr, acronym {
+    border: 0;
+}
+
 /* End Normalize CSS */
 
 * {
@@ -43,11 +48,11 @@ abbr,acronym { border:0;}
 
 body {
     background-color: #0B0C10;
-    }
+}
 
 .topNavigation {
     background-color: #45A29E;
-    height: 5rem; 
+    height: 5rem;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -60,10 +65,9 @@ body {
     font-size: 1.8rem;
 }
 
-
-.squarebutton {
-/*    background-color: #66FCF1;*/
-background-color: #45A29E;
+.squareButton {
+    /*    background-color: #66FCF1;*/
+    background-color: #45A29E;
     border-width: 0;
     border-radius: 5px;
     height: 34px;
@@ -74,13 +78,13 @@ background-color: #45A29E;
     transition: 0.3s;
 }
 
-.squarebutton:hover {
+.squareButton:hover {
     transform: scale(1.1, 1.1);
     transition: 0.5s;
     border-radius: 0;
 }
 
-.squarebutton:active {
+.squareButton:active {
     transition: 0.1s;
     transform: scale(0.9, 0.9);
 }
@@ -94,7 +98,7 @@ background-color: #45A29E;
     align-items: center;
     display: flex;
     justify-content: center;
-    border-radius: 0px 0px 20px 20px;
+    border-radius: 0 0 20px 20px;
 }
 
 .searchField {
@@ -108,7 +112,6 @@ background-color: #45A29E;
     outline: none;
     box-shadow: 5px 5px 5px #0B0C10;
 }
-
 
 .searchField:focus {
     box-shadow: 5px 5px 5px #45A29E;

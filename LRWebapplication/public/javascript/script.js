@@ -1,19 +1,32 @@
+function getOrders() {
+    let params = new URLSearchParams();
+    const pIdArr = ['id', 'pId', 'pAnz', 'status'];
+    makeParams(params, pIdArr);
+
+    fetch('http://localhost/getOrders?' + params)
+        .then(response => response.json())
+        .then(data => generate_table(data));
+}
+
 function generate_table(json) {
     let body = document.getElementsByTagName("body")[0];
 
-    if (document.getElementById("datatable") != null) {
-        removeElement("datatable");
-    }
+    // If table exists -> Delete
+    let tDelete = document.getElementById("datatable");
+    tDelete != null ? tDelete.parentNode.removeChild(tDelete) : null
+
+    // Table
     let table = document.createElement("table");
+    table.setAttribute("id", "datatable")
     table.setAttribute("class", "styled-table")
 
     // Table Header
     let thead = table.createTHead();
     let row = thead.insertRow();
-
     for (let jsonElementKey in json[0]) {
         let cell = row.insertCell();
-        cell.appendChild(document.createTextNode(jsonElementKey))
+        cell.appendChild(document.createTextNode((jsonElementKey[0].toUpperCase() + jsonElementKey.substring(1))
+            .replace("_", "-")))
     }
 
     // Table Data
@@ -29,26 +42,13 @@ function generate_table(json) {
     body.appendChild(table);
 }
 
-function removeElement(id) {
-    let elem = document.getElementById(id);
-    return elem.parentNode.removeChild(elem);
-}
-
-function getOrders() {
-    let params = new URLSearchParams();
-    getValue("id")!=""?params.append("id", getValue("id")):null
-    getValue("pId")!=""?params.append("pId", getValue("pId")):null
-    getValue("pAnz")!=""?params.append("pAnz", getValue("pAnz")):null
-    getValue("status")!=""?params.append("status", getValue("status")):null
-    console.log(params)
-    fetch('http://localhost/getOrders?' + params)
-        .then(response => response.json())
-        .then(data => generate_table(data));
-
+function makeParams(params, ids) {
+    for (let pos in ids) {
+        let value = getValue(ids[pos]);
+        value !== "" ? params.append(ids[pos], value) : null;
+    }
 }
 
 function getValue(id) {
     return document.getElementById(id).value
 }
-
-module.exports = { generate_table, getOrders }
