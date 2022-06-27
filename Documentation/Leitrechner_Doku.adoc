@@ -27,7 +27,6 @@
 |Verarbeitung der Datenkank Daten | Gemeinsam
 |===
 
-
 == Teilprojekt
 
 include::Leitrechner.adoc[leveloffset=+1]

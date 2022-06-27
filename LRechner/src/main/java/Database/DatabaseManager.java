@@ -59,13 +59,6 @@ public class DatabaseManager {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        List<String> newAuftrage = getNewAuftrage(LocalDate.of(2022, 5, 4));
-        for (String s : newAuftrage) {
-            System.out.println(s);
-        }
-    }
 }
 
 

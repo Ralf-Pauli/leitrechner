@@ -1,16 +1,53 @@
 :numbered:
+
 == Teilprprojekt Leitrechner, Ralf Pauli, Michael Krebs  
 
 === Allgemeines
 Damit die Fertigunsstraße die Aufträge aus der Datenbank bearbeiten kann, müssen diese erst dorthin gelangen. Wir haben uns entschieden diese Aufgabe zu übernehemen und durch Sockets zu realisieren.
 
-=== Allgemeine Umsetzung
+=== Umsetzung
+
+==== Zweck des Leitrechners
 image::uebersicht.png[alt=Überischt, width=80%, float="right"] 
 Der Webservice speichert die Aufträge die vom *JavaFX Client*, der *Android App* und der *Webpage* gesendet werden und speichert diese in der Datenbank. +
 Wir holen die noch offenen Aufträge aus der Datenbank und senden diese dann an die Fertigungsstraße, sobalt der Auftrag dort verarbeitet wurde, kriegen wir eine Rückmeldung und ändern den Status des Auftrags.
 
+==== Datenbanksystem
+Wir verwenden eine MySql Datenbank die auf Devel1 erreichbar ist.
+
+=== Database Manager
+Wir benutzen die https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html[Java Sql Libary] für den Zugriff auf die MySql Datenank. 
+In der Database Mananger Klasse haben wir ein getNewAuftraege Methode, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt.
+
+==== Probleme
+* Wir haben versucht ein Sql Statement zu schreiben welches die Parameter weglässt zu denen kein wert zugordet ist, allerdings hat dies nach langen testen und probieren nicht funktionet. Deswegen haben wir uns dazu entschieden ein Sql Statemnt zur Laufzeit zusammenzubauen.
+
 === Socket Server
+
+==== Zweck des Socket Servers
+Der Socket Server baut mit hilfe https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html[Java Socket Libary] eine Verbindng mit dem Client Socket auf, um Auftragdaten wie z. B. neue Aufträge, auszutauschen.
+
+==== Umsetzung 
+. Es wird ein Verbindung zum Socket Client aufgebaut. 
++
+[source, java]
+----
+    public static void openConnection() {
+        try (ServerSocket sv = new ServerSocket(43000)) {
+            Socket connection = sv.accept();
+            ...
+    }
+----
++
+. Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe Database Manager) über die Konsole an den Client.
+
+. Falls der Client etwas anderes sendet als bereit wird eine entsprächende Rückmeldung gegeben bzw. wenn "exit" gesendet wird, wenden der Server und der Client beendet.
+
+==== Probleme
+* Socket Client
+
 
 === Socket Client
 
-=== Database Manager
+==== Probleme
+* Socket Server
