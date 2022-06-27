@@ -44,10 +44,13 @@ Der Socket Server baut mit hilfe https://docs.oracle.com/javase/7/docs/api/java/
 . Falls der Client etwas anderes sendet als bereit wird eine entsprächende Rückmeldung gegeben bzw. wenn "exit" gesendet wird, wenden der Server und der Client beendet.
 
 ==== Probleme
-* Socket Client
+* Socket Server
 
 
 === Socket Client
 
+==== Zweck des Socket Servers
+Der Socket Client baut eine Verbinung mit dem Socket Server auf, bekommt dadurch neue Aufträge, und sendet an die Fertigungsstraße weiterzuleiten.
+
 ==== Probleme
-* Socket Server
+* Json convertiertung
