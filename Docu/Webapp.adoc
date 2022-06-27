@@ -1,2 +1,2 @@
 :numbered:
-== Teilprprojekt <Leitrechner, Ralf Pauli, Michael Krebs>  
+== Teilprprojekt Webapp, Ralf Pauli, Michael Krebs  
