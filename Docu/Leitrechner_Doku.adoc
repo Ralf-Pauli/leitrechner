@@ -1,0 +1,35 @@
+= Projektdokumentation Leitrechner
+:doctype: book
+:author: Michael Krebs, Ralf Pauli
+:source-highlighter: prettify
+:lang: de
+//:toc: left
+//:toclevels: 5
+//:toc-title: Inhaltsverzeichnis
+:sectnums:
+:sectnumlevels: 10
+:imagesdir: .\images
+
+== Einleitung 
+=== Aufgabenverteilung
+
+.Leitrechner
+|===
+|Server Socket      | Michael Krebs
+|Client Socket      | Ralf Pauli
+|Datenbankzugriff   | Gemeinsam
+|===
+
+.Webapp
+|===
+|Design & Seitenaufbau| Michael Krebs
+|Datenbankzugriff   | Ralf Pauli
+|Verarbeitung der Datenkank Daten | Gemeinsam
+|===
+
+
+== Teilprojekt
+
+include::Leitrechner.adoc[leveloffset=+1]
+
+include::Webapp.adoc[leveloffset=+1]

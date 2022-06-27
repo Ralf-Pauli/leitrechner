@@ -1,0 +1,10 @@
+
+== Teilprojekt <Titel, Autor>
+
+=== Zweck des Teilprojekts
+Lorem ipsum dolor sit amet, ...
+
+=== Umsetzung 
+Lorem ipsum dolor sit amet, ...
+
+=== ...

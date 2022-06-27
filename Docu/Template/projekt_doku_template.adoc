@@ -1,0 +1,56 @@
+
+= Projektdokumentation Fertigung
+:doctype: book
+:author: Dieter_Roth
+:sectnums:
+:source-highlighter: prettify
+:lang: de
+:data-uri:      // Bilder in der HTML-Datei
+:toc: left
+:toclevels: 10
+:toc-title: Inhaltsverzeichnis
+:sectnums:
+:sectnumlevels: 10
+//:nofooter:
+//:pdf-themesdir: .  
+//:pdf-theme: custom
+
+
+== Einleitung <Autor>
+=== Aufgabenverteilung
+|===
+|Datenbankzugriff|Max Mustermann
+|Leitrechner|Erika Mustermann
+|...|...
+|===
+
+=== Allgemeine fachlichen Anforderungen 
+* Use-Case Diagramm
+  ** Kurze Beschreibung zu jedem UseCase (Ein Satz; Genaueres in den Teilprojekten)
+
+image::usecasediagramm.png[title='Beispiel für Usecase Diagramm']
+
+=== Allgemeine Umsetzung
+* Übersichtsdiagramm (Komponenten+Datenfluss)
+  ** Kurze Beschreibung zu jeder Komponente und zu jeder Verbindung (Ein Satz; Genaueres in den Teilprojekten).
+* Erläuterung wie die einzelnen Komponenten zusammenspielen und was deren Aufgabe ist. (Das kann man ambesten an Hand eines Beispiels erklären)
+* Sourcecode-Verwaltung
+
+== Teilprojekte
+
+include::doku_teil1_template.adoc[leveloffset=+1]
+
+include::doku_teil2_template.adoc[leveloffset=+1]
+
+include::doku_teil3_template.adoc[leveloffset=+1]
+
+== Anhang <Autoren>
+=== Glossar
+=== Diagramme
+=== ...
+
+
+
+= Ein (sehr gutes) Beispielprojekt der Vorgänger
+* Teilprojekt: http://devel1/projekte/AlteProjekte/BFS2005Fi/tourenplanung/hkoenigs.pdf
+* Gesamtprojekt: http://devel1/projekte/AlteProjekte/BFS2005Fi/tourenplanung/
