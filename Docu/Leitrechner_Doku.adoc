@@ -1,0 +1,42 @@
+= Projektdokumentation Leitrechner
+:doctype: book
+:author: Michael Krebs, Ralf Pauli
+:source-highlighter: prettify
+:lang: de
+//:toc: left
+//:toclevels: 5
+//:toc-title: Inhaltsverzeichnis
+:sectnums:
+:sectnumlevels: 10
+:imagesdir: .\images
+
+== Einleitung 
+=== Aufgabenverteilung
+
+.Leitrechner
+|===
+|Server Socket      | Michael Krebs
+|Client Socket      | Ralf Pauli
+|Datenbankzugriff   | Gemeinsam
+|===
+
+.Webapp
+|===
+|Design & Seitenaufbau| Michael Krebs
+|Datenbankzugriff   | Ralf Pauli
+|Verarbeitung der Datenkank Daten | Gemeinsam
+|===
+
+=== Allgemeines
+Damit die Fertigunsstraße die Aufträge aus der Datenbank bearbeiten kann, müssen diese erst dorthin gelangen. Wir haben uns entschieden diese Aufgabe zu übernehemen und durch Sockets zu realisieren.
+
+=== Allgemeine Umsetzung
+image::uebersicht.png[alt=Überischt, width=80%, float="right"] 
+Der Webservice speichert die Aufträge die vom *JavaFX Client*, der *Android App* und der *Webpage* gesendet werden und speichert diese in der Datenbank. +
+Wir holen die noch offenen Aufträge aus der Datenbank und senden diese dann an die Fertigungsstraße, sobalt der Auftrag dort verarbeitet wurde, kriegen wir eine Rückmeldung und ändern den Status des Auftrags.
+
+== Teilprojekt
+
+include::Leitrechner.adoc[:leveloffset: [+-]0–5]
+
+include::Webapp.adoc[:leveloffset: [+-]0–5]

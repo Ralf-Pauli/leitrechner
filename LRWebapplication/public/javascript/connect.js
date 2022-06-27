@@ -37,12 +37,12 @@ let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl 
             query = check(query, count);
             query += " status = " + mysql.escape(status);
         }
-
         connection.query(query, function (err, result) {
             try {
+                console.log(result);
                 resolve(convertToJson(result));
             } catch (error) {
-                throw error;
+                console.log(err);
             }
         });
     });
