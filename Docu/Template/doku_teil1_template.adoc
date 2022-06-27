@@ -1,0 +1,60 @@
+:numbered: 
+== Teilprprojekt <Titel, Autor>  
+* Je nach Art des Teilprojekts mehrere der folgenden Punkte / Unterpunkte.
+* Es muss mindestens ein Codeausschnitt mit Erklärung dabei sein.
+
+=== Istzustand (Bei uns SAP-Transaktionen/ Unity-Programm)
+Lorem ipsum dolor sit amet, ...
+
+=== Zweck des Teilprojekts
+Lorem ipsum dolor sit amet, ...
+
+=== Umsetzung 
+Lorem ipsum dolor sit amet, ...
+
+==== Programmiersprache/Entwicklungsumgebung
+Lorem ipsum dolor sit amet, ...
+
+==== Verwendete Bibliotheken + Versionsnummer
+Lorem ipsum dolor sit amet, ...
+
+==== ER/Relationemodell
+Lorem ipsum dolor sit amet, ...
+
+==== Datenbanksystem
+Lorem ipsum dolor sit amet, ...
+
+==== Verwendete Schnittstellen im Projekt
+Lorem ipsum dolor sit amet, ...
+
+==== Angebotene Schnittstelle im Projekt
+Lorem ipsum dolor sit amet, ...
+
+==== Klassendiagramm
+Lorem ipsum dolor sit amet, ...
+
+==== Wie wurde getestet 
+Lorem ipsum dolor sit amet, ...
+
+==== User Interface 
+    * Bildschirmausschnitt mit Erklärung
+
+==== .....
+
+Beispiel für Quellcode:
+[source,java]
+----
+public float berechneVerkaufspreis()
+{
+    int quadratmeterpreis = 15;
+ 
+    return (wollMenge * quadratmeterpreis);
+}
+----
+
+=== Quellen
+|===
+|Ascii-Doc|https://www.hznet.de/textproc/asciidoc-intro.html
+|Virtuelle Hardware Lernfabrik|https://trac.ux5.edvschulen-plattling.de/trac-bfs2019fi/wiki/Projekte/virtuelle-hardware
+|...|...
+|===
