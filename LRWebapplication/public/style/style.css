@@ -66,14 +66,14 @@ body {
 }
 
 .squareButton {
-    /*    background-color: #66FCF1;*/
     background-color: #45A29E;
     border-width: 0;
     border-radius: 5px;
     height: 34px;
+    width: 40px;
     color: #0B0C10;
     font-weight: bold;
-    margin-left: 15px;
+    margin-left: 10px;
     padding: 5px;
     transition: 0.3s;
 }
@@ -130,6 +130,11 @@ body {
     font-family: sans-serif;
     box-shadow: 0 0 30px rgba(0, 152, 121, 0.7);
     border-radius: 10px;
+    transition: transform .4s;
+}
+
+.styled-table.zoomed {
+    transform: scale(1.1);
 }
 
 .styled-table th,
@@ -159,4 +164,16 @@ body {
 .styled-table tbody tr:hover {
     background: #1F2833;
     color: #45A29E;
+}
+
+#i-box {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+    transition: transform .4s;
+}
+
+#i-box.zoomed {
+    transform: scale(1.3);
 }

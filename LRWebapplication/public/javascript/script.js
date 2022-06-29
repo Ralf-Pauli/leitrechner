@@ -9,16 +9,31 @@ function getOrders() {
 }
 
 function generate_table(json) {
+
     let body = document.getElementsByTagName("body")[0];
 
-    // If table exists -> Delete
+    // If table exists -> Delete | Same with InfoBox
     let tDelete = document.getElementById("datatable");
     tDelete != null ? tDelete.parentNode.removeChild(tDelete) : null
+    let iBDelete = document.getElementById('i-box');
+    iBDelete != null ? iBDelete.parentNode.removeChild(iBDelete):null;
+
+    if (json.length === 0){
+        let infoBox = document.createElement('div');
+        infoBox.setAttribute('id', 'i-box');
+        infoBox.appendChild(document.createTextNode("Nichts gefunden"));
+        body.appendChild(infoBox);
+        infoBox.classList.add('zoomed');
+        requestAnimationFrame(() => {
+            infoBox.classList.remove('zoomed')
+        })
+    }
 
     // Table
     let table = document.createElement("table");
     table.setAttribute("id", "datatable")
     table.setAttribute("class", "styled-table")
+    table.classList.add('zoomed');
 
     // Table Header
     let thead = table.createTHead();
@@ -40,6 +55,9 @@ function generate_table(json) {
         })
     });
     body.appendChild(table);
+    requestAnimationFrame(() => {
+       table.classList.remove('zoomed')
+    });
 }
 
 function makeParams(params, ids) {
