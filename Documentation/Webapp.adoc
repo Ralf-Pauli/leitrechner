@@ -1,2 +1,58 @@
 :numbered:
-== Teilprprojekt Webapp, Ralf Pauli, Michael Krebs  
+== Teilprojekt Webapp, Ralf Pauli, Michael Krebs
+
+* Je nach Art des Teilprojekts mehrere der folgenden Punkte / Unterpunkte.
+* Es muss mindestens ein Codeausschnitt mit Erklärung dabei sein.
+
+=== Zweck des Teilprojekts
+Die Webapplikation dient zur (firmeninternen) grafischen Darstellung von Aufträgen.
+
+=== Umsetzung
+Lorem ipsum dolor sit amet, ...
+
+==== Programmiersprache/Entwicklungsumgebung
+Wir nutzen link:https://nodejs.org[NodeJS] als Grundlage für unsere App.
+NodeJS ist eine Laufzeitumgebung, die dazu dient,
+*JavaScript*-Code außerhalb eines Webbrowsers auszuführen. +
+Gearbeitet wurde mithilfe der Jetbrains IDE link:https://www.jetbrains.com/phpstorm/[PhpStorm]
+
+==== Verwendete Bibliotheken/Frameworks
+Ein fundamentales Framework ist link:https://expressjs.com/[Express JS] mit der verwendeten, zurzeit aktuellsten Version, link:https://www.npmjs.com/package/express[4.18.1(npm)]
+Dieses ermöglicht ein einfaches und unkompliziertes Bereitstellen von APIs. Diese werden auch zum Bereitstellen von der Webapplikation genutzt. +
+Das Framework link:https://pugjs.org/[PugJS], Version link:https://npmjs.com/package/pug[3.0.2(npm)] ist eine Engine, die dazu genutzt wird, pug-Syntax in HTML-Code zu rendern. +
+Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu implementieren.
+
+==== Datenbanksystem
+Eine zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API bereitzustellen.
+
+==== Verwendete Schnittstellen im Projekt
+Datenbank wird abgefragt
+
+==== Angebotene Schnittstelle im Projekt
+Lorem ipsum dolor sit amet, ...
+
+==== Wie wurde getestet
+Lorem ipsum dolor sit amet, ...
+
+==== User Interface
+* Bildschirmausschnitt mit Erklärung
+
+==== .....
+
+Beispiel für Quellcode:
+[source,java]
+----
+public float berechneVerkaufspreis()
+{
+    int quadratmeterpreis = 15;
+
+    return (wollMenge * quadratmeterpreis);
+}
+----
+
+=== Quellen
+|===
+|Ascii-Doc|https://www.hznet.de/textproc/asciidoc-intro.html
+|Virtuelle Hardware Lernfabrik|https://trac.ux5.edvschulen-plattling.de/trac-bfs2019fi/wiki/Projekte/virtuelle-hardware
+|...|...
+|===
