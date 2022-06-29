@@ -1,4 +1,4 @@
-package main.java.Fertigungsstrasse;
+package ProductionLine;
 
 import Database.DatabaseManager;
 

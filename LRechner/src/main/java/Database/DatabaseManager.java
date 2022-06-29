@@ -1,4 +1,4 @@
-package main.java.Database;
+package Database;
 
 import java.sql.*;
 import java.time.LocalDate;
