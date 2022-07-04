@@ -9,7 +9,7 @@ Damit die Fertigunsstraße die Aufträge aus der Datenbank bearbeiten kann, müs
 ==== Schnittstellen
 - Datenbanksystem:
 +
-Wir verwenden eine MySql Datenbank die auf Devel1 erreichbar ist.
+Wir verwenden eine MySql Datenbank die auf http://devel1/phpmyadmin/[Devel1] erreichbar ist.
 Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigen wir nur die Aufträge und Produkte.
 
 - Fertigungsstraße

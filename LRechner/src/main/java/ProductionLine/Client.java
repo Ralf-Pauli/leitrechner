@@ -11,8 +11,8 @@ import java.net.Socket;
 public class Client {
     public static String status = "bereit";
     private static String sConsole = "";
-    private static String ip = "10.0.207.12";
-    private static int port = 43000;
+    private static final String ip = "10.0.207.12";
+    private static final int port = 43000;
 
     public static void setsConsole(String sConsole) {
         Client.sConsole = sConsole;
@@ -76,7 +76,7 @@ public class Client {
 }
 
 class consoleReaderT extends Thread {
-    private boolean exit = false;
+    private final boolean exit = false;
     @Override
     public void run() {
         BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
