@@ -36,3 +36,12 @@
 
 31.05.2022
  - Verzweiflung JavaScript Act 3: Das Ende
+
+20.06.2022
+ - Dokumentation beginn
+
+21.06.2022 - 
+ - Dokumenation fortsetzung
+
+29.06.2022
+ - Webapp: Effekt beim Suchen
