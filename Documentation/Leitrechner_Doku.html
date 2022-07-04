@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.15">
-<meta name="author" content="Michael Krebs, Ralf Pauli">
+<meta name="application-name" content="Leitrechner Dokumentation">
+<meta name="author" content=":">
 <title>Projektdokumentation Leitrechner</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -437,11 +438,47 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
 </head>
-<body class="book">
+<body class="book toc2 toc-left">
 <div id="header">
 <h1>Projektdokumentation Leitrechner</h1>
 <div class="details">
 <span id="author" class="author">Michael Krebs, Ralf Pauli</span><br>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Inhaltsverzeichnis</div>
+<ul class="sectlevel1">
+<li><a href="#_einleitung">1. Einleitung</a>
+<ul class="sectlevel2">
+<li><a href="#_ziele">1.1. Ziele</a></li>
+<li><a href="#_aufgabenverteilung">1.2. Aufgabenverteilung</a></li>
+</ul>
+</li>
+<li><a href="#_teilprojekt">2. Teilprojekt</a>
+<ul class="sectlevel2">
+<li><a href="#_teilprprojekt_leitrechner_ralf_pauli_michael_krebs">2.1. Teilprprojekt Leitrechner, Ralf Pauli, Michael Krebs</a>
+<ul class="sectlevel3">
+<li><a href="#_allgemeines">2.1.1. Allgemeines</a></li>
+<li><a href="#_database_manager">2.1.2. Database Manager</a></li>
+<li><a href="#_probleme">2.1.3. Probleme</a></li>
+<li><a href="#_ausblick_auf_mögliche_erweiterungen">2.1.4. Ausblick auf mögliche Erweiterungen</a></li>
+</ul>
+</li>
+<li><a href="#_teilprojekt_webapp_ralf_pauli_michael_krebs">2.2. Teilprojekt Webapp, Ralf Pauli, Michael Krebs</a>
+<ul class="sectlevel3">
+<li><a href="#_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</a></li>
+<li><a href="#_umsetzung">2.2.2. Umsetzung</a></li>
+<li><a href="#_quellen">2.2.3. Quellen</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_anhang">3. Anhang</a>
+<ul class="sectlevel2">
+<li><a href="#_glossar">3.1. Glossar</a></li>
+<li><a href="#_quellen_2">3.2. Quellen</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 <div id="content">
@@ -449,9 +486,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_einleitung">1. Einleitung</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_aufgabenverteilung">1.1. Aufgabenverteilung</h3>
+<h3 id="_ziele">1.1. Ziele</h3>
+<div class="paragraph">
+<p>Es solle ein Programm entstehen, das Daten aus der Datenbank holt und dies an verschiedenste Programme weiterleitet. Bei uns sind momentan die Verbindnung zwischen Fertiungsstraße und Datenbank realisiert.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_aufgabenverteilung">1.2. Aufgabenverteilung</h3>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. Leitrechner</caption>
+<caption class="title">Tabelle 1. Leitrechner</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -472,7 +515,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tbody>
 </table>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. Webapp</caption>
+<caption class="title">Tabelle 2. Webapp</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -505,36 +548,80 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Damit die Fertigunsstraße die Aufträge aus der Datenbank bearbeiten kann, müssen diese erst dorthin gelangen. Wir haben uns entschieden diese Aufgabe zu übernehemen und durch Sockets zu realisieren.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_umsetzung">2.1.2. Umsetzung</h4>
 <div class="sect4">
-<h5 id="_zweck_des_leitrechners">2.1.2.1. Zweck des Leitrechners</h5>
+<h5 id="_schnittstellen">2.1.1.1. Schnittstellen</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Datenbanksystem:</p>
+<div class="paragraph">
+<p>Wir verwenden eine MySql Datenbank die auf Devel1 erreichbar ist.
+Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigen wir nur die Aufträge und Produkte.</p>
+</div>
+</li>
+<li>
+<p>Fertigungsstraße</p>
+<div class="paragraph">
+<p>Wir verbinden uns über eine Socket Verbindung zu der Fertigunsstraße. Wir machen dies um Daten aus der Datenbank zu holen und diese an die Fertigungsstraße weiterzuleiten.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ablauf">2.1.1.2. Ablauf</h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Es wird ein Verbindung zum Socket Client aufgebaut.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">public static void openConnection() {
+    try (ServerSocket sv = new ServerSocket(43000)) {
+        Socket connection = sv.accept();
+        ...
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe <a href="#_database_manager">Database Manager</a>) über die Konsole an den Client.</p>
+</li>
+<li>
+<p>Nachdem der Auftrag fertig produziert wurde, sendet der Cient die Auftragsnummer des produzierten Produkts und einen Status, z. B. "bereit" um den nächsten zu bekommen oder "exit" um den Client und Server zu beenden, zurück.</p>
+</li>
+<li>
+<p>Ab dem zweiten "bereit" (erstes "bereit" ist um den Vorgang zu starten), dass der Server bekommt wird der Status des fertigen Produkts in der Datenbank auf "fertig" gesetzt.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_zweck_des_leitrechners">2.1.1.3. Zweck des Leitrechners</h5>
 <div class="imageblock right">
 <div class="content">
 <img src="./images/uebersicht.png" alt="Überischt" width="80%">
 </div>
+<div class="title">Abbildung 1. Übersicht Carlos</div>
 </div>
 <div class="paragraph">
 <p>Der Webservice speichert die Aufträge die vom <strong>JavaFX Client</strong>, der <strong>Android App</strong> und der <strong>Webpage</strong> gesendet werden und speichert diese in der Datenbank.<br>
-Wir holen die noch offenen Aufträge aus der Datenbank und senden diese dann an die Fertigungsstraße, sobalt der Auftrag dort verarbeitet wurde, kriegen wir eine Rückmeldung und ändern den Status des Auftrags.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_datenbanksystem">2.1.2.2. Datenbanksystem</h5>
-<div class="paragraph">
-<p>Wir verwenden eine MySql Datenbank die auf Devel1 erreichbar ist.</p>
+Wir holen die noch offenen Aufträge aus der Datenbank und senden diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegen wir eine Rückmeldung und ändern den Status des Auftrags in der Datenbank.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_database_manager">2.1.3. Database Manager</h4>
+<h4 id="_database_manager">2.1.2. Database Manager</h4>
 <div class="paragraph">
 <p>Wir benutzen die <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html">Java Sql Libary</a> für den Zugriff auf die MySql Datenank.
-In der Database Mananger Klasse haben wir ein getNewAuftraege Methode, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt.</p>
+In der Database Mananger Klasse haben wir ein <strong>getNewAuftraege</strong> Methode, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt.</p>
 </div>
-<div class="sect4">
-<h5 id="_probleme">2.1.3.1. Probleme</h5>
+<div class="paragraph">
+<p>Damit der Status des Auftrag nach der Produktion geändert werden kann haben wir die <strong>setStatus</strong> Methode erstellt, welche ein Update durchführt um den Status an der entsprechenden Id ändert.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_probleme">2.1.3. Probleme</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -543,73 +630,138 @@ In der Database Mananger Klasse haben wir ein getNewAuftraege Methode, welche al
 </ul>
 </div>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_socket_server">2.1.4. Socket Server</h4>
-<div class="sect4">
-<h5 id="_zweck_des_socket_servers">2.1.4.1. Zweck des Socket Servers</h5>
-<div class="paragraph">
-<p>Der Socket Server baut mit hilfe <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">Java Socket Libary</a> eine Verbindng mit dem Client Socket auf, um Auftragdaten wie z. B. neue Aufträge, auszutauschen.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_umsetzung_2">2.1.4.2. Umsetzung</h5>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Es wird ein Verbindung zum Socket Client aufgebaut.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight linenums"><code data-lang="java">    public static void openConnection() {
-        try (ServerSocket sv = new ServerSocket(43000)) {
-            Socket connection = sv.accept();
-            ...
-    }</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe Database Manager) über die Konsole an den Client.</p>
-</li>
-<li>
-<p>Falls der Client etwas anderes sendet als bereit wird eine entsprächende Rückmeldung gegeben bzw. wenn "exit" gesendet wird, wenden der Server und der Client beendet.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_probleme_2">2.1.4.3. Probleme</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Socket Server</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_socket_client">2.1.5. Socket Client</h4>
-<div class="sect4">
-<h5 id="_zweck_des_socket_servers_2">2.1.5.1. Zweck des Socket Servers</h5>
-<div class="paragraph">
-<p>Der Socket Client baut eine Verbinung mit dem Socket Server auf, bekommt dadurch neue Aufträge, und sendet an die Fertigungsstraße weiterzuleiten.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_probleme_3">2.1.5.2. Probleme</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Json convertiertung</p>
-</li>
-</ul>
-</div>
-</div>
+<h4 id="_ausblick_auf_mögliche_erweiterungen">2.1.4. Ausblick auf mögliche Erweiterungen</h4>
+
 </div>
 </div>
 <div class="sect2">
-<h3 id="_teilprprojekt_webapp_ralf_pauli_michael_krebs">2.2. Teilprprojekt Webapp, Ralf Pauli, Michael Krebs</h3>
+<h3 id="_teilprojekt_webapp_ralf_pauli_michael_krebs">2.2. Teilprojekt Webapp, Ralf Pauli, Michael Krebs</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Je nach Art des Teilprojekts mehrere der folgenden Punkte / Unterpunkte.</p>
+</li>
+<li>
+<p>Es muss mindestens ein Codeausschnitt mit Erklärung dabei sein.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</h4>
+<div class="paragraph">
+<p>Die Webapplikation dient zur (firmeninternen) grafischen Darstellung von Aufträgen.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_umsetzung">2.2.2. Umsetzung</h4>
+<div class="paragraph">
+<p>Lorem ipsum dolor sit amet, &#8230;&#8203;</p>
+</div>
+<div class="sect4">
+<h5 id="_programmierspracheentwicklungsumgebung">2.2.2.1. Programmiersprache/Entwicklungsumgebung</h5>
+<div class="paragraph">
+<p>Wir nutzen <a href="https://nodejs.org">NodeJS</a> als Grundlage für unsere App.
+NodeJS ist eine Laufzeitumgebung, die dazu dient,
+<strong>JavaScript</strong>-Code außerhalb eines Webbrowsers auszuführen.<br>
+Gearbeitet wurde mithilfe der Jetbrains IDE <a href="https://www.jetbrains.com/phpstorm/">PhpStorm</a></p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_verwendete_bibliothekenframeworks">2.2.2.2. Verwendete Bibliotheken/Frameworks</h5>
+<div class="paragraph">
+<p>Ein fundamentales Framework ist <a href="https://expressjs.com/">Express JS</a> mit der verwendeten, zurzeit aktuellsten Version, <a href="https://www.npmjs.com/package/express">4.18.1(npm)</a>
+Dieses ermöglicht ein einfaches und unkompliziertes Bereitstellen von APIs. Diese werden auch zum Bereitstellen von der Webapplikation genutzt.<br>
+Das Framework <a href="https://pugjs.org/">PugJS</a>, Version <a href="https://npmjs.com/package/pug">3.0.2(npm)</a> ist eine Engine, die dazu genutzt wird, pug-Syntax in HTML-Code zu rendern.<br>
+Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu implementieren.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_datenbanksystem">2.2.2.3. Datenbanksystem</h5>
+<div class="paragraph">
+<p>Eine zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API bereitzustellen.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_verwendete_schnittstellen_im_projekt">2.2.2.4. Verwendete Schnittstellen im Projekt</h5>
+<div class="paragraph">
+<p>Datenbank wird abgefragt</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_angebotene_schnittstelle_im_projekt">2.2.2.5. Angebotene Schnittstelle im Projekt</h5>
+<div class="paragraph">
+<p>Lorem ipsum dolor sit amet, &#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_wie_wurde_getestet">2.2.2.6. Wie wurde getestet</h5>
+<div class="paragraph">
+<p>Lorem ipsum dolor sit amet, &#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_user_interface">2.2.2.7. User Interface</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Bildschirmausschnitt mit Erklärung</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="">2.2.2.8. &#8230;&#8203;..</h5>
+<div class="paragraph">
+<p>Beispiel für Quellcode:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">public float berechneVerkaufspreis()
+{
+    int quadratmeterpreis = 15;
+
+    return (wollMenge * quadratmeterpreis);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_quellen">2.2.3. Quellen</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ascii-Doc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.hznet.de/textproc/asciidoc-intro.html" class="bare">https://www.hznet.de/textproc/asciidoc-intro.html</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Virtuelle Hardware Lernfabrik</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://trac.ux5.edvschulen-plattling.de/trac-bfs2019fi/wiki/Projekte/virtuelle-hardware" class="bare">https://trac.ux5.edvschulen-plattling.de/trac-bfs2019fi/wiki/Projekte/virtuelle-hardware</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_anhang">3. Anhang</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_glossar">3.1. Glossar</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_quellen_2">3.2. Quellen</h3>
 
 </div>
 </div>
@@ -617,7 +769,7 @@ In der Database Mananger Klasse haben wir ein getNewAuftraege Methode, welche al
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-27 11:05:44 +0200
+Last updated 2022-06-29 10:21:40 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
