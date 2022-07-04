@@ -37,32 +37,44 @@ public class Server {
                     orders = DatabaseManager.getNewAuftrage(lastRead);
                 }
                 answer = input.readLine();
-                System.out.println("Pull: " + answer);
+                System.out.println("Input: " + answer);
                 if (answer == null) {
                     output.println("Bitte Status senden!");
                 } else if (answer.contains("exit")) {
                     stop = true;
-                } else if (answer.contains("bereit")) {
+                } else if(answer.equals("bereit")){
                     orderMsg = getMessage();
-                    System.out.println("Push: " + orderMsg);
+                    System.out.println("Output: " + orderMsg);
                     output.println(orderMsg);
+                } else if (answer.contains("bereit")) {
                     DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+                    orders.remove(0);
+                    orderMsg = getMessage();
+                    System.out.println("Output: " + orderMsg);
+                    output.println(orderMsg);
                 } else if (answer.contains("lauft")){
                     System.out.println("läuft");
                 } else {
                     continue;
                 }
                 oldOrder = orders.get(0);
-                orders.remove(0);
+
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Das Programm wird beendet");
+            System.exit(-1);
         }
 
     }
 
     public static String getMessage() {
-        return orders.get(0);
+        String result = "";
+        try {
+            result = orders.get(0);
+        } catch (IndexOutOfBoundsException ie){
+            System.out.println("Keine neuen Datensätze vorhanden");
+        }
+        return result;
     }
 }
