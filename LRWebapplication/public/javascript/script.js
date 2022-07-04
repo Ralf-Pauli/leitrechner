@@ -3,7 +3,7 @@ function getOrders() {
     const pIdArr = ['id', 'pId', 'pAnz', 'status'];
     makeParams(params, pIdArr);
 
-    fetch('http://localhost/getOrders?' + params)
+    fetch('http://localhost:3000/getOrders?' + params)
         .then(response => response.json())
         .then(data => generate_table(data));
 }
