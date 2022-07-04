@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js --ext *",
+    "dev": "nodemon src/server.js --ext *",
     "start": "node ./bin/www",
     "watch": "nodemon --ignore public"
   },
