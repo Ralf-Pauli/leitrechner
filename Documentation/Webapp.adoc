@@ -1,58 +1,69 @@
 :numbered:
-== Teilprojekt Webapp, Ralf Pauli, Michael Krebs
-
-* Je nach Art des Teilprojekts mehrere der folgenden Punkte / Unterpunkte.
-* Es muss mindestens ein Codeausschnitt mit Erklärung dabei sein.
+== Teilprojekt Webapp
 
 === Zweck des Teilprojekts
 Die Webapplikation dient zur (firmeninternen) grafischen Darstellung von Aufträgen.
 
-=== Umsetzung
-Lorem ipsum dolor sit amet, ...
-
-==== Programmiersprache/Entwicklungsumgebung
+=== Programmiersprache/Entwicklungsumgebung
 Wir nutzen link:https://nodejs.org[NodeJS] als Grundlage für unsere App.
 NodeJS ist eine Laufzeitumgebung, die dazu dient,
 *JavaScript*-Code außerhalb eines Webbrowsers auszuführen. +
 Gearbeitet wurde mithilfe der Jetbrains IDE link:https://www.jetbrains.com/phpstorm/[PhpStorm]
 
-==== Verwendete Bibliotheken/Frameworks
+=== Verwendete Bibliotheken/Frameworks
 Ein fundamentales Framework ist link:https://expressjs.com/[Express JS] mit der verwendeten, zurzeit aktuellsten Version, link:https://www.npmjs.com/package/express[4.18.1(npm)]
 Dieses ermöglicht ein einfaches und unkompliziertes Bereitstellen von APIs. Diese werden auch zum Bereitstellen von der Webapplikation genutzt. +
 Das Framework link:https://pugjs.org/[PugJS], Version link:https://npmjs.com/package/pug[3.0.2(npm)] ist eine Engine, die dazu genutzt wird, pug-Syntax in HTML-Code zu rendern. +
 Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu implementieren.
 
-==== Datenbanksystem
-Eine zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API bereitzustellen.
+=== Datenbanksystem
+Eine auf Devel1, zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API, zur weiteren Verwendung bereitzustellen.
 
-==== Verwendete Schnittstellen im Projekt
-Datenbank wird abgefragt
+=== Verwendete Schnittstellen im Projekt
+Die Datenbank wird für Aufträge angefragt
 
-==== Angebotene Schnittstelle im Projekt
-Lorem ipsum dolor sit amet, ...
+=== Wie wurde getestet
+Die Funktionsfähigkeit der Webapplikation wurde manuell, mithilfe von 'White-Box-Testing', getestet.
+Dabei haben die Testpersonen Kenntnisse über den Code.
 
-==== Wie wurde getestet
-Lorem ipsum dolor sit amet, ...
+=== User Interface
+image::ui-webapp.png[User Interface Webapp]
+Durch Eingabe von entweder Auftragsnummer, Produkt Id, Produkt Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt. +
+Ein leerlassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.
 
-==== User Interface
-* Bildschirmausschnitt mit Erklärung
+=== Funktion
 
-==== .....
-
-Beispiel für Quellcode:
-[source,java]
+*index.js*
+[source,javascript]
 ----
-public float berechneVerkaufspreis()
-{
-    int quadratmeterpreis = 15;
+const sql = require('../public/javascript/connect.js')
+const express = require("express")
+const app = express()
+app.use(express.static('public'))
 
-    return (wollMenge * quadratmeterpreis);
+app.get("/", (req, res) => {
+    res.render('index')
+})
+
+app.set('view engine', 'pug')
+
+app.listen(3000)
+----
+
+REST-api: bei einer Get-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet. +
+Das 'app.listen(<port>)' sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.
+
+[source,javscript]
+----
+function getOrders() {
+    let params = new URLSearchParams();
+    const pIdArr = ['id', 'pId', 'pAnz', 'status'];
+    makeParams(params, pIdArr);
+
+    fetch('http://localhost:3000/getOrders?' + params)
+        .then(response => response.json())
+        .then(data => generate_table(data));
 }
 ----
-
-=== Quellen
-|===
-|Ascii-Doc|https://www.hznet.de/textproc/asciidoc-intro.html
-|Virtuelle Hardware Lernfabrik|https://trac.ux5.edvschulen-plattling.de/trac-bfs2019fi/wiki/Projekte/virtuelle-hardware
-|...|...
-|===
+Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf. 
+Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im HTML erzeugt.

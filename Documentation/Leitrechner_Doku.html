@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_teilprojekt">2. Teilprojekt</a>
 <ul class="sectlevel2">
-<li><a href="#_teilprprojekt_leitrechner_ralf_pauli_michael_krebs">2.1. Teilprprojekt Leitrechner, Ralf Pauli, Michael Krebs</a>
+<li><a href="#_teilprprojekt_leitrechner">2.1. Teilprprojekt Leitrechner</a>
 <ul class="sectlevel3">
 <li><a href="#_allgemeines">2.1.1. Allgemeines</a></li>
 <li><a href="#_database_manager">2.1.2. Database Manager</a></li>
@@ -463,11 +463,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_ausblick_auf_mögliche_erweiterungen">2.1.4. Ausblick auf mögliche Erweiterungen</a></li>
 </ul>
 </li>
-<li><a href="#_teilprojekt_webapp_ralf_pauli_michael_krebs">2.2. Teilprojekt Webapp, Ralf Pauli, Michael Krebs</a>
+<li><a href="#_teilprojekt_webapp">2.2. Teilprojekt Webapp</a>
 <ul class="sectlevel3">
 <li><a href="#_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</a></li>
-<li><a href="#_umsetzung">2.2.2. Umsetzung</a></li>
-<li><a href="#_quellen">2.2.3. Quellen</a></li>
+<li><a href="#_programmierspracheentwicklungsumgebung_2">2.2.2. Programmiersprache/Entwicklungsumgebung</a></li>
+<li><a href="#_verwendete_bibliothekenframeworks">2.2.3. Verwendete Bibliotheken/Frameworks</a></li>
+<li><a href="#_datenbanksystem">2.2.4. Datenbanksystem</a></li>
+<li><a href="#_verwendete_schnittstellen_im_projekt">2.2.5. Verwendete Schnittstellen im Projekt</a></li>
+<li><a href="#_wie_wurde_getestet">2.2.6. Wie wurde getestet</a></li>
+<li><a href="#_user_interface">2.2.7. User Interface</a></li>
+<li><a href="#_funktion">2.2.8. Funktion</a></li>
 </ul>
 </li>
 </ul>
@@ -475,7 +480,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_anhang">3. Anhang</a>
 <ul class="sectlevel2">
 <li><a href="#_glossar">3.1. Glossar</a></li>
-<li><a href="#_quellen_2">3.2. Quellen</a></li>
+<li><a href="#_quellen">3.2. Quellen</a></li>
 </ul>
 </li>
 </ul>
@@ -542,7 +547,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_teilprojekt">2. Teilprojekt</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_teilprprojekt_leitrechner_ralf_pauli_michael_krebs">2.1. Teilprprojekt Leitrechner, Ralf Pauli, Michael Krebs</h3>
+<h3 id="_teilprprojekt_leitrechner">2.1. Teilprprojekt Leitrechner</h3>
 <div class="sect3">
 <h4 id="_allgemeines">2.1.1. Allgemeines</h4>
 <div class="paragraph">
@@ -555,7 +560,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p>Datenbanksystem:</p>
 <div class="paragraph">
-<p>Wir verwenden eine MySql Datenbank die auf Devel1 erreichbar ist.
+<p>Wir verwenden eine <a href="https://www.mysql.com/de/">MySql</a> Datenbank die auf <a href="http://devel1/phpmyadmin/">Devel1</a> erreichbar ist.
 Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigen wir nur die Aufträge und Produkte.</p>
 </div>
 </li>
@@ -569,7 +574,19 @@ Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benöti
 </div>
 </div>
 <div class="sect4">
-<h5 id="_ablauf">2.1.1.2. Ablauf</h5>
+<h5 id="_bibliotheken">2.1.1.2. Bibliotheken</h5>
+<div class="paragraph">
+<p>Es wird die Libraries <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">java.net.Socket</a> und <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">java.net.ServerSocket</a> für die Kommunikation zwischen Client und Server verwendet.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_programmierspracheentwicklungsumgebung">2.1.1.3. Programmiersprache/Entwicklungsumgebung</h5>
+<div class="paragraph">
+<p>Es wird die Programmiersprache <a href="https://www.java.com/de/">Java</a> in der Version 1.8 und die Java-IDE <a href="https://www.jetbrains.com/de-de/idea/">IntelliJ</a> von <a href="https://www.jetbrains.com/de-de/">JetBrains</a> benutzt, um das Projekt zu verwirklichen.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_ablauf">2.1.1.4. Ablauf</h5>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -588,16 +605,59 @@ Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benöti
 <p>Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe <a href="#_database_manager">Database Manager</a>) über die Konsole an den Client.</p>
 </li>
 <li>
-<p>Nachdem der Auftrag fertig produziert wurde, sendet der Cient die Auftragsnummer des produzierten Produkts und einen Status, z. B. "bereit" um den nächsten zu bekommen oder "exit" um den Client und Server zu beenden, zurück.</p>
+<p>Nachdem der Auftrag fertig produziert wurde, sendet der Cient die Auftragsnummer des produzierten Produkts und einen Status, z. B. "bereit" um den nächsten Auftrag zu bekommen oder "exit" um den Client und Server zu beenden, zurück.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">while (!stop) {
+    // Wenn keine offenen Aufträge in der Liste sind holl alle neuen offenen aus der DB
+    if (orders.size() == 0) {
+        orders = DatabaseManager.getNewAuftrage(lastRead);
+    }
+    // Lese Nachricht vom Client
+    answer = input.readLine();
+    System.out.println("Input: " + answer);
+    // Wenn jemand manuell "" sendet oder einfach Enter drückt
+    if (answer == null) {
+        output.println("Bitte Status senden!");
+    // Wenn der Client exit sendet wird unser Programm auch "beendet"
+    // bzw. er geht aus der while Schleife raus, aber danach passiert nichts mehr
+    } else if (answer.contains("exit")) {
+        stop = true;
+
+    // Dies sollte nur beim ersten mal senden vorkommen
+    } else if(answer.equals("bereit")){
+        orderMsg = getMessage();
+        System.out.println("Output: " + orderMsg);
+        output.println(orderMsg);
+    // Der Status wird in der DB aktuallisiert,
+    // der fertige Auftrag aus der Liste entfernt,
+    // der neue Auftrag wird aus der Liste geholt und an den Client gesendet.
+    } else if (answer.contains("bereit")) {
+        DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+        orders.remove(0);
+        orderMsg = getMessage();
+        System.out.println("Output: " + orderMsg);
+        output.println(orderMsg);
+
+    } else if (answer.contains("lauft")){
+        System.out.println("läuft");
+    // Wenn nichts zutrifft, mach weiter
+    } else {
+        continue;
+    }
+    oldOrder = orders.get(0);
+}</code></pre>
+</div>
+</div>
 </li>
 <li>
-<p>Ab dem zweiten "bereit" (erstes "bereit" ist um den Vorgang zu starten), dass der Server bekommt wird der Status des fertigen Produkts in der Datenbank auf "fertig" gesetzt.</p>
+<p>Wenn ein "bereit" gesendet wird, wird in der Datenbank der Status des Auftrag mit der gesendeten Id auf "fertig" gesetz und der nächste Auftrag an den Client geschickt.</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_zweck_des_leitrechners">2.1.1.3. Zweck des Leitrechners</h5>
+<h5 id="_zweck_des_leitrechners">2.1.1.5. Zweck des Leitrechners</h5>
 <div class="imageblock right">
 <div class="content">
 <img src="./images/uebersicht.png" alt="Überischt" width="80%">
@@ -606,7 +666,7 @@ Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benöti
 </div>
 <div class="paragraph">
 <p>Der Webservice speichert die Aufträge die vom <strong>JavaFX Client</strong>, der <strong>Android App</strong> und der <strong>Webpage</strong> gesendet werden und speichert diese in der Datenbank.<br>
-Wir holen die noch offenen Aufträge aus der Datenbank und senden diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegen wir eine Rückmeldung und ändern den Status des Auftrags in der Datenbank.</p>
+Wir holen alle noch offenen Aufträge aus der Datenbank und senden diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegen wir eine Rückmeldung und ändern den Status des Auftrags in der Datenbank.</p>
 </div>
 </div>
 </div>
@@ -625,7 +685,10 @@ In der Database Mananger Klasse haben wir ein <strong>getNewAuftraege</strong> M
 <div class="ulist">
 <ul>
 <li>
-<p>Wir haben versucht ein Sql Statement zu schreiben welches die Parameter weglässt zu denen kein wert zugordet ist, allerdings hat dies nach langen testen und probieren nicht funktionet. Deswegen haben wir uns dazu entschieden ein Sql Statemnt zur Laufzeit zusammenzubauen.</p>
+<p>Beim Start des Programms, wird um die Kommunikation zu starten ein "beginn" vom Client zum Server gesendet. Allerdings ist hinter dem "beginn" kein Auftrag hinterlegt, deshalb soll auch nichts in der Datenbank aktualisiert werden und es soll auch kein Element aus der Auftrag Liste entfernt werden.</p>
+</li>
+<li>
+<p>Wir haben versucht ein Sql Statement zu schreiben welches die Parameter ignoriert zu denen kein wert zugordet ist, allerdings hat dies nach langen testen und probieren nicht funktionet. Deswegen haben wir uns dazu entschieden ein Sql Statemnt abhängig von übergebenen Parametern zusammenzubauen.</p>
 </li>
 </ul>
 </div>
@@ -636,17 +699,7 @@ In der Database Mananger Klasse haben wir ein <strong>getNewAuftraege</strong> M
 </div>
 </div>
 <div class="sect2">
-<h3 id="_teilprojekt_webapp_ralf_pauli_michael_krebs">2.2. Teilprojekt Webapp, Ralf Pauli, Michael Krebs</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Je nach Art des Teilprojekts mehrere der folgenden Punkte / Unterpunkte.</p>
-</li>
-<li>
-<p>Es muss mindestens ein Codeausschnitt mit Erklärung dabei sein.</p>
-</li>
-</ul>
-</div>
+<h3 id="_teilprojekt_webapp">2.2. Teilprojekt Webapp</h3>
 <div class="sect3">
 <h4 id="_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</h4>
 <div class="paragraph">
@@ -654,12 +707,7 @@ In der Database Mananger Klasse haben wir ein <strong>getNewAuftraege</strong> M
 </div>
 </div>
 <div class="sect3">
-<h4 id="_umsetzung">2.2.2. Umsetzung</h4>
-<div class="paragraph">
-<p>Lorem ipsum dolor sit amet, &#8230;&#8203;</p>
-</div>
-<div class="sect4">
-<h5 id="_programmierspracheentwicklungsumgebung">2.2.2.1. Programmiersprache/Entwicklungsumgebung</h5>
+<h4 id="_programmierspracheentwicklungsumgebung_2">2.2.2. Programmiersprache/Entwicklungsumgebung</h4>
 <div class="paragraph">
 <p>Wir nutzen <a href="https://nodejs.org">NodeJS</a> als Grundlage für unsere App.
 NodeJS ist eine Laufzeitumgebung, die dazu dient,
@@ -667,8 +715,8 @@ NodeJS ist eine Laufzeitumgebung, die dazu dient,
 Gearbeitet wurde mithilfe der Jetbrains IDE <a href="https://www.jetbrains.com/phpstorm/">PhpStorm</a></p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_verwendete_bibliothekenframeworks">2.2.2.2. Verwendete Bibliotheken/Frameworks</h5>
+<div class="sect3">
+<h4 id="_verwendete_bibliothekenframeworks">2.2.3. Verwendete Bibliotheken/Frameworks</h4>
 <div class="paragraph">
 <p>Ein fundamentales Framework ist <a href="https://expressjs.com/">Express JS</a> mit der verwendeten, zurzeit aktuellsten Version, <a href="https://www.npmjs.com/package/express">4.18.1(npm)</a>
 Dieses ermöglicht ein einfaches und unkompliziertes Bereitstellen von APIs. Diese werden auch zum Bereitstellen von der Webapplikation genutzt.<br>
@@ -676,79 +724,79 @@ Das Framework <a href="https://pugjs.org/">PugJS</a>, Version <a href="https://n
 Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu implementieren.</p>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_datenbanksystem">2.2.2.3. Datenbanksystem</h5>
+<div class="sect3">
+<h4 id="_datenbanksystem">2.2.4. Datenbanksystem</h4>
 <div class="paragraph">
-<p>Eine zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API bereitzustellen.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_verwendete_schnittstellen_im_projekt">2.2.2.4. Verwendete Schnittstellen im Projekt</h5>
-<div class="paragraph">
-<p>Datenbank wird abgefragt</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_angebotene_schnittstelle_im_projekt">2.2.2.5. Angebotene Schnittstelle im Projekt</h5>
-<div class="paragraph">
-<p>Lorem ipsum dolor sit amet, &#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_wie_wurde_getestet">2.2.2.6. Wie wurde getestet</h5>
-<div class="paragraph">
-<p>Lorem ipsum dolor sit amet, &#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_user_interface">2.2.2.7. User Interface</h5>
-<div class="ulist">
-<ul>
-<li>
-<p>Bildschirmausschnitt mit Erklärung</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="">2.2.2.8. &#8230;&#8203;..</h5>
-<div class="paragraph">
-<p>Beispiel für Quellcode:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="java">public float berechneVerkaufspreis()
-{
-    int quadratmeterpreis = 15;
-
-    return (wollMenge * quadratmeterpreis);
-}</code></pre>
-</div>
-</div>
+<p>Eine auf Devel1, zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API, zur weiteren Verwendung bereitzustellen.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_quellen">2.2.3. Quellen</h4>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ascii-Doc</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://www.hznet.de/textproc/asciidoc-intro.html" class="bare">https://www.hznet.de/textproc/asciidoc-intro.html</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Virtuelle Hardware Lernfabrik</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://trac.ux5.edvschulen-plattling.de/trac-bfs2019fi/wiki/Projekte/virtuelle-hardware" class="bare">https://trac.ux5.edvschulen-plattling.de/trac-bfs2019fi/wiki/Projekte/virtuelle-hardware</a></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&#8230;&#8203;</p></td>
-</tr>
-</tbody>
-</table>
+<h4 id="_verwendete_schnittstellen_im_projekt">2.2.5. Verwendete Schnittstellen im Projekt</h4>
+<div class="paragraph">
+<p>Die Datenbank wird für Aufträge angefragt</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wie_wurde_getestet">2.2.6. Wie wurde getestet</h4>
+<div class="paragraph">
+<p>Die Funktionsfähigkeit der Webapplikation wurde manuell, mithilfe von 'White-Box-Testing', getestet.
+Dabei haben die Testpersonen Kenntnisse über den Code.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_user_interface">2.2.7. User Interface</h4>
+<div class="imageblock">
+<div class="content">
+<img src="./images/ui-webapp.png" alt="User Interface Webapp">
+</div>
+</div>
+<div class="paragraph">
+<p>Durch Eingabe von entweder Auftragsnummer, Produkt Id, Produkt Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt.<br>
+Ein leerlassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_funktion">2.2.8. Funktion</h4>
+<div class="paragraph">
+<p><strong>index.js</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="javascript">const sql = require('../public/javascript/connect.js')
+const express = require("express")
+const app = express()
+app.use(express.static('public'))
+
+app.get("/", (req, res) =&gt; {
+    res.render('index')
+})
+
+app.set('view engine', 'pug')
+
+app.listen(3000)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>REST-api: bei einer Get-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet.<br>
+Das 'app.listen(&lt;port&gt;)' sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="javscript">function getOrders() {
+    let params = new URLSearchParams();
+    const pIdArr = ['id', 'pId', 'pAnz', 'status'];
+    makeParams(params, pIdArr);
+
+    fetch('http://localhost:3000/getOrders?' + params)
+        .then(response =&gt; response.json())
+        .then(data =&gt; generate_table(data));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf.
+Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im HTML erzeugt.</p>
+</div>
 </div>
 </div>
 </div>
@@ -761,7 +809,7 @@ Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu impl
 
 </div>
 <div class="sect2">
-<h3 id="_quellen_2">3.2. Quellen</h3>
+<h3 id="_quellen">3.2. Quellen</h3>
 
 </div>
 </div>
@@ -769,7 +817,7 @@ Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu impl
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-06-29 10:21:40 +0200
+Last updated 2022-07-04 12:53:17 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
