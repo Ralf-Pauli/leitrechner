@@ -1,6 +1,6 @@
 :numbered:
 
-== Teilprprojekt Leitrechner, Ralf Pauli, Michael Krebs  
+== Teilprprojekt Leitrechner
 
 
 === Allgemeines
@@ -16,8 +16,12 @@ Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benöti
 +
 Wir verbinden uns über eine Socket Verbindung zu der Fertigunsstraße. Wir machen dies um Daten aus der Datenbank zu holen und diese an die Fertigungsstraße weiterzuleiten.
 
+==== Bibliotheken
+Es wird die Libraries https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html[java.net.Socket] und https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html[java.net.ServerSocket] für die Kommunikation zwischen Client und Server verwendet.  
+
+
 ====  Programmiersprache/Entwicklungsumgebung
-Wir nutzen https://www.java.com/de/[Java] mit der Verison 1.8 und programmieren in https://www.jetbrains.com/de-de/idea/[IntelliJ], der Leistungsfähige und ergonomische IDE für JVM von JetBrains
+Es wird die Programmiersprache https://www.java.com/de/[Java] in der Version 1.8 und die Java-IDE https://www.jetbrains.com/de-de/idea/[IntelliJ] von https://www.jetbrains.com/de-de/[JetBrains] benutzt, um das Projekt zu verwirklichen.
 
 ==== Ablauf 
 
@@ -49,7 +53,7 @@ while (!stop) {
     // Wenn jemand manuell "" sendet oder einfach Enter drückt
     if (answer == null) {
         output.println("Bitte Status senden!");
-    // Wenn der Client exit sendet wird unser Programm auch "beendet" 
+    // Wenn der Client exit sendet wird unser Programm auch "beendet"
     // bzw. er geht aus der while Schleife raus, aber danach passiert nichts mehr
     } else if (answer.contains("exit")) {
         stop = true;
