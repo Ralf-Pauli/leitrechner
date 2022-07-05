@@ -2,6 +2,7 @@
 :doctype: book
 :author: Michael Krebs, Ralf Pauli
 :source-highlighter: prettify
+:docinfo: shared
 :lang: de
 :toc: left
 :toclevels: 3
@@ -12,14 +13,11 @@
 :figure-caption: Abbildung
 :table-caption: Tabelle
 :app-name: Leitrechner Dokumentation
-:
 
 == Einleitung 
 
 === Ziele
 Es solle ein Programm entstehen, das Daten aus der Datenbank holt und dies an verschiedenste Programme weiterleitet. Bei uns sind momentan die Verbindnung zwischen Fertiungsstraße und Datenbank realisiert.
-
-
 
 === Aufgabenverteilung
 
@@ -46,6 +44,8 @@ include::Webapp.adoc[leveloffset=+1]
 == Anhang
 
 === Glossar
+|===
+|===
 
 === Quellen
 

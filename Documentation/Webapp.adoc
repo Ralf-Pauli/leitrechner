@@ -27,6 +27,7 @@ Die Funktionsfähigkeit der Webapplikation wurde manuell, mithilfe von 'White-Bo
 Dabei haben die Testpersonen Kenntnisse über den Code.
 
 === User Interface
+.Webapp UI
 image::ui-webapp.png[User Interface Webapp]
 Durch Eingabe von entweder Auftragsnummer, Produkt Id, Produkt Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt. +
 Ein leerlassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.
@@ -67,3 +68,6 @@ function getOrders() {
 ----
 Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf. 
 Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im HTML erzeugt.
+
+=== Probleme
+* Wir haben versucht ein SQL Statement zu schreiben, welches die Parameter ignoriert, zu denen kein wert zugeordnet ist, allerdings hat dies nach langen testen und probieren nicht funktioniert. Deswegen haben wir uns dazu entschieden ein SQL Statement abhängig von übergebenen Parametern zusammenzubauen.
