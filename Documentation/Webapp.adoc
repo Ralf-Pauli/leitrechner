@@ -14,7 +14,7 @@ Gearbeitet wurde mithilfe der Jetbrains IDE link:https://www.jetbrains.com/phpst
 Ein fundamentales Framework ist link:https://expressjs.com/[Express JS] mit der verwendeten, zurzeit aktuellsten Version, link:https://www.npmjs.com/package/express[4.18.1(npm)]
 Dieses ermöglicht ein einfaches und unkompliziertes Bereitstellen von APIs. Diese werden auch zum Bereitstellen von der Webapplikation genutzt. +
 Das Framework link:https://pugjs.org/[PugJS], Version link:https://npmjs.com/package/pug[3.0.2(npm)] ist eine Engine, die dazu genutzt wird, pug-Syntax in HTML-Code zu rendern. +
-Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu implementieren.
+Außerdem erlaubt Pug ein vereinfachtes Nutzen von JavaScript Ausdrücke zu implementieren.
 
 === Datenbanksystem
 Eine auf Devel1, zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API, zur weiteren Verwendung bereitzustellen.
@@ -28,8 +28,8 @@ Dabei haben die Testpersonen Kenntnisse über den Code.
 
 === User Interface
 image::ui-webapp.png[User Interface Webapp]
-Durch Eingabe von entweder Auftragsnummer, Produkt Id, Produkt Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt. +
-Ein leerlassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.
+Durch Eingabe von entweder Auftragsnummer, Produkt-Id, Produkt-Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt. +
+Ein leer lassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.
 
 === Funktion
 
@@ -53,7 +53,17 @@ app.listen(3000)
 REST-api: bei einer Get-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet. +
 Das 'app.listen(<port>)' sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.
 
+Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf. 
+Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON-Object) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im DOM erzeugt und in die Webapplikation einfügt.
+
+'''
+.Flussdiagramm
+image::wappfd.svg[Static, 450]
+
+Die Funktion der Webapplikation lässt sich durch ein Flussdiagramm vereinfacht darstellen. +
+Vom Client wird, durch das Drücken eines Buttons, die Funktion *'getOrders()'* aus *'script.js'* aufgerufen.
 [source,javscript]
+.*script.js*
 ----
 function getOrders() {
     let params = new URLSearchParams();
@@ -65,5 +75,51 @@ function getOrders() {
         .then(data => generate_table(data));
 }
 ----
-Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf. 
-Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im HTML erzeugt.
+Diese sendet einen HTTP GET-Request (fetch), an eine davor konfigurierte URI in der Server API.
+
+[source,javscript]
+.*server.js*
+----
+const sql = require('../public/javascript/connect.js')
+...
+app.get("/getOrders", (req, res) => {
+    const id = req.query.id;
+    const produkt_id = req.query.pId;
+    const produkt_anzahl = req.query.pAnz;
+    const status = req.query.status;
+    sql.getJsonData(id, produkt_id, produkt_anzahl, status).then((result) => {
+        res.send(result)
+    })
+})
+...
+----
+Die API liest, auf einen Request hin, die Variable *'getJsonData'* des Scripts
+*'connect.js'* und sendet die erhaltenen Daten an den Client.
+[source,javascript]
+.*connect.js*
+----
+let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl = null, status = null) {
+let count = 0;
+return new Promise((resolve) => {
+let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
+
+        if (id !== null) {
+            query = check(query, count);
+            query += " id = " + mysql.escape(id);
+            count++;
+        }
+        ...
+        connection.query(query, function (err, result) {
+            try {
+                console.log(result);
+                resolve(convertToJson(result));
+            } catch (error) {
+                console.log(err);
+            }
+        });
+    });
+}
+----
+Beim Versuch die Variable auszulesen wird die function getData ausgeführt.
+Diese baut aus den übergebenen Parametern eine SQL-Query und sendet die Abfrage an die Datenbank.
+Die Antwort vom Datenbankserver wird daraufhin in ein JSON-Object umgewandelt und an den vorher genannten fetch Befehl weitergereicht.

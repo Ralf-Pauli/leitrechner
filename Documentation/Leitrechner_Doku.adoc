@@ -19,8 +19,6 @@
 === Ziele
 Es solle ein Programm entstehen, das Daten aus der Datenbank holt und dies an verschiedenste Programme weiterleitet. Bei uns sind momentan die Verbindnung zwischen Fertiungsstraße und Datenbank realisiert.
 
-
-
 === Aufgabenverteilung
 
 .Leitrechner

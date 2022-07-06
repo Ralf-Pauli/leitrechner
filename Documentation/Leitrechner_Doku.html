@@ -721,7 +721,7 @@ Gearbeitet wurde mithilfe der Jetbrains IDE <a href="https://www.jetbrains.com/p
 <p>Ein fundamentales Framework ist <a href="https://expressjs.com/">Express JS</a> mit der verwendeten, zurzeit aktuellsten Version, <a href="https://www.npmjs.com/package/express">4.18.1(npm)</a>
 Dieses ermöglicht ein einfaches und unkompliziertes Bereitstellen von APIs. Diese werden auch zum Bereitstellen von der Webapplikation genutzt.<br>
 Das Framework <a href="https://pugjs.org/">PugJS</a>, Version <a href="https://npmjs.com/package/pug">3.0.2(npm)</a> ist eine Engine, die dazu genutzt wird, pug-Syntax in HTML-Code zu rendern.<br>
-Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu implementieren.</p>
+Außerdem erlaubt Pug ein vereinfachtes Nutzen von JavaScript Ausdrücke zu implementieren.</p>
 </div>
 </div>
 <div class="sect3">
@@ -751,8 +751,8 @@ Dabei haben die Testpersonen Kenntnisse über den Code.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Durch Eingabe von entweder Auftragsnummer, Produkt Id, Produkt Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt.<br>
-Ein leerlassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.</p>
+<p>Durch Eingabe von entweder Auftragsnummer, Produkt-Id, Produkt-Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt.<br>
+Ein leer lassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.</p>
 </div>
 </div>
 <div class="sect3">
@@ -780,7 +780,23 @@ app.listen(3000)</code></pre>
 <p>REST-api: bei einer Get-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet.<br>
 Das 'app.listen(&lt;port&gt;)' sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.</p>
 </div>
+<div class="paragraph">
+<p>Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf.
+Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON-Object) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im DOM erzeugt und in die Webapplikation einfügt.</p>
+</div>
+<hr>
+<div class="imageblock">
+<div class="content">
+<img src="./images/wappfd.svg" alt="Static" width="450">
+</div>
+<div class="title">Abbildung 2. Flussdiagramm</div>
+</div>
+<div class="paragraph">
+<p>Die Funktion der Webapplikation lässt sich durch ein Flussdiagramm vereinfacht darstellen.<br>
+Vom Client wird, durch das Drücken eines Buttons, die Funktion <strong>'getOrders()'</strong> aus <strong>'script.js'</strong> aufgerufen.</p>
+</div>
 <div class="listingblock">
+<div class="title"><strong>script.js</strong></div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="javscript">function getOrders() {
     let params = new URLSearchParams();
@@ -794,8 +810,59 @@ Das 'app.listen(&lt;port&gt;)' sorgt dafür, dass Anfragen an diesen Port angeno
 </div>
 </div>
 <div class="paragraph">
-<p>Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf.
-Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im HTML erzeugt.</p>
+<p>Diese sendet einen HTTP GET-Request (fetch), an eine davor konfigurierte URI in der Server API.</p>
+</div>
+<div class="listingblock">
+<div class="title"><strong>server.js</strong></div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="javscript">const sql = require('../public/javascript/connect.js')
+...
+app.get("/getOrders", (req, res) =&gt; {
+    const id = req.query.id;
+    const produkt_id = req.query.pId;
+    const produkt_anzahl = req.query.pAnz;
+    const status = req.query.status;
+    sql.getJsonData(id, produkt_id, produkt_anzahl, status).then((result) =&gt; {
+        res.send(result)
+    })
+})
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Die API liest, auf einen Request hin, die Variable <strong>'getJsonData'</strong> des Scripts
+<strong>'connect.js'</strong> und sendet die erhaltenen Daten an den Client.</p>
+</div>
+<div class="listingblock">
+<div class="title"><strong>connect.js</strong></div>
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="javascript">let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl = null, status = null) {
+let count = 0;
+return new Promise((resolve) =&gt; {
+let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
+
+        if (id !== null) {
+            query = check(query, count);
+            query += " id = " + mysql.escape(id);
+            count++;
+        }
+        ...
+        connection.query(query, function (err, result) {
+            try {
+                console.log(result);
+                resolve(convertToJson(result));
+            } catch (error) {
+                console.log(err);
+            }
+        });
+    });
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Beim Versuch die Variable auszulesen wird die function getData ausgeführt.
+Diese baut aus den übergebenen Parametern eine SQL-Query und sendet die Abfrage an die Datenbank.
+Die Antwort vom Datenbankserver wird daraufhin in ein JSON-Object umgewandelt</p>
 </div>
 </div>
 </div>
@@ -817,7 +884,7 @@ Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON) wird darau
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-04 12:53:17 +0200
+Last updated 2022-07-05 10:53:35 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
