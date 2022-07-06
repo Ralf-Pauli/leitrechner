@@ -49,11 +49,7 @@ let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl 
 }
 
 function check(query, count) {
-    if (count === 0) {
-        query += " Where"
-    } else {
-        query += " and"
-    }
+    count === 0 ?  query+=" Where" : query+=" and";
     return query;
 }
 
