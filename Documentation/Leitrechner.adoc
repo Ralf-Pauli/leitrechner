@@ -1,16 +1,21 @@
 :numbered:
 
 == Teilprojekt Leitrechner
+.Übersicht Carlos
+image::uebersicht.png[alt=Überischt, width=80%, float="right"] 
+Der Webservice speichert die Aufträge, die vom *JavaFX Client*, der *Android App* und der *Webpage* gesendet werden und speichert diese in der Datenbank. +
+Man holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.
 
 
-=== Zweck des Teilprojekts
-Damit die *Fertigungsstraße* die Aufträge aus der *Datenbank* bearbeiten kann, müssen diese erst dorthin gelangen. Man hat sich dazu entschieden, diese Aufgabe zu übernehmen und durch *Sockets* zu realisieren.
+=== Umsetztung
+Wir haben uns entschieden die Leitrechner Kommunikation durch Sockets umzusetzen. Der Grund https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html[Sockets] zu verwenden ist das eine Gruppe sich im vorherigen Projekt schon mit Sockets auseinandergesetzt hat und dies den Recherche Zeitraum stark verringert. 
+
 
 ===  Programmiersprache/Entwicklungsumgebung
 Es wird die Programmiersprache https://www.java.com/de/[Java] in der Version 1.8 und die Java-IDE https://www.jetbrains.com/de-de/idea/[IntelliJ] von https://www.jetbrains.com/de-de/[JetBrains] verwendet, um das Projekt zu verwirklichen.
 
 === Verwendete Bibliotheken/Frameworks
-Es wird die Libraries https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html[java.net.Socket] und https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html[java.net.ServerSocket] für die Kommunikation zwischen Client und Server verwendet.  
+Es wird die Libraries java.net.Socket und https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html[java.net.ServerSocket] für die Kommunikation zwischen Client und Server verwendet.  
 
 === Verwendete Schnittstellen im Projekt
 - Datenbanksystem:
@@ -37,62 +42,44 @@ public static void openConnection() {
 ----
 +
 . Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe <<Database Manager>>) über die Socket Verbindung (*output.println()*) an den Client.
++
+[source, java]
+----
+} else if(answer.equals("bereit")){
+    orderMsg = getMessage();
+    System.out.println("Output: " + orderMsg);
+    output.println(orderMsg);
+}
+----
 
 . Nachdem der Auftrag fertig produziert wurde, sendet der Client die Auftragsnummer des produzierten Produkts und einen Status, z. B. "bereit", um den nächsten Auftrag zu bekommen oder "exit", um den Client und Server zu beenden, zurück.
 +
 [source, java]
 ----
 while (!stop) {
-    // Wenn keine offenen Aufträge in der Liste sind holl alle neuen offenen aus der DB
-    if (orders.size() == 0) {
-        orders = DatabaseManager.getNewAuftrage(lastRead);
-    }
     // Lese Nachricht vom Client
     answer = input.readLine();
     System.out.println("Input: " + answer);
-    // Wenn jemand manuell "" sendet oder einfach Enter drückt
-    if (answer == null) {
-        output.println("Bitte Status senden!");
-    // Wenn der Client exit sendet wird unser Programm auch "beendet"
-    // bzw. er geht aus der while Schleife raus, aber danach passiert nichts mehr
+    ...
+    // Beende den Loop
     } else if (answer.contains("exit")) {
         stop = true;
-
-    // Dies sollte nur beim ersten mal senden vorkommen
-    } else if(answer.equals("bereit")){
-        orderMsg = getMessage();
-        System.out.println("Output: " + orderMsg);
-        output.println(orderMsg);
-    // Der Status wird in der DB aktuallisiert,
-    // der fertige Auftrag aus der Liste entfernt,
-    // der neue Auftrag wird aus der Liste geholt und an den Client gesendet.
-    } else if (answer.contains("bereit")) {
-        DatabaseManager.setStatus(answer.split(";")[0], "fertig");
-        orders.remove(0);
-        orderMsg = getMessage();
-        System.out.println("Output: " + orderMsg);
-        output.println(orderMsg);
-
-    } else if (answer.contains("lauft")){
-        System.out.println("läuft");
-    // Wenn nichts zutrifft, mach weiter
-    } else {
-        continue;
-    }
-    oldOrder = orders.get(0);
-}
 ----
 
-
 . Wenn ein "bereit" gesendet wird, wird in der Datenbank der Status des Auftrag mit der gesendeten Id auf "fertig" gesetzt und der nächste Auftrag an den Client geschickt.
-
-
-==== Zweck des Leitrechners
-.Übersicht Carlos
-image::uebersicht.png[alt=Überischt, width=80%, float="right"] 
-Der Webservice speichert die Aufträge, die vom *JavaFX Client*, der *Android App* und der *Webpage* gesendet werden und speichert diese in der Datenbank. +
-Man holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.
-
++
+[source, java]
+----
+} else if (answer.contains("bereit")) {
+    // Der Status wird in der DB aktuallisiert,
+    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+    // der fertige Auftrag aus der Liste entfernt,
+    orders.remove(0);
+    // der neue Auftrag wird aus der Liste geholt und an den Client gesendet.
+    orderMsg = getMessage();
+    System.out.println("Output: " + orderMsg);
+    output.println(orderMsg);
+----
 
 
 === Database Manager

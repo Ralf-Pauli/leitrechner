@@ -16,8 +16,8 @@
 
 == Einleitung 
 
-=== Ziele
-Es solle ein Programm entstehen, das Daten aus der Datenbank holt und dies an verschiedenste Programme weiterleitet. Bei uns sind momentan die Verbindnung zwischen Fertiungsstraße und Datenbank realisiert.
+=== Nutzen des Leitrechners
+Es soll ein Programm entstehen, das den Austausch von Daten zwischen zwei Schnitstellen vereinfachen soll. Der Datenaustausch zwischen Fertigunsstraße und Datenbank wurde hier durch den Leitrechner vereinfacht.
 
 === Aufgabenverteilung
 
@@ -48,4 +48,7 @@ include::Webapp.adoc[leveloffset=+1]
 |===
 
 === Quellen
-
+https://www.baeldung.com/a-guide-to-java-sockets[A Guide to Java Sockets] +
+https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html[Oracle Doku ServerSocket] +
+http://devel1/projekte/BFS2020FI/sockets[Socket Doku Heigl/Frank] +
+https://zetcode.com/db/mysqljava/[MySQL Java]

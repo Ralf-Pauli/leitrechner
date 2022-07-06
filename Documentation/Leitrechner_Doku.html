@@ -449,7 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#_einleitung">1. Einleitung</a>
 <ul class="sectlevel2">
-<li><a href="#_ziele">1.1. Ziele</a></li>
+<li><a href="#_nutzen_des_leitrechners">1.1. Nutzen des Leitrechners</a></li>
 <li><a href="#_aufgabenverteilung">1.2. Aufgabenverteilung</a></li>
 </ul>
 </li>
@@ -457,7 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_teilprojekt_leitrechner">2.1. Teilprojekt Leitrechner</a>
 <ul class="sectlevel3">
-<li><a href="#_zweck_des_teilprojekts">2.1.1. Zweck des Teilprojekts</a></li>
+<li><a href="#_umsetztung">2.1.1. Umsetztung</a></li>
 <li><a href="#_programmierspracheentwicklungsumgebung">2.1.2. Programmiersprache/Entwicklungsumgebung</a></li>
 <li><a href="#_verwendete_bibliothekenframeworks">2.1.3. Verwendete Bibliotheken/Frameworks</a></li>
 <li><a href="#_verwendete_schnittstellen_im_projekt">2.1.4. Verwendete Schnittstellen im Projekt</a></li>
@@ -469,7 +469,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_teilprojekt_webapp">2.2. Teilprojekt Webapp</a>
 <ul class="sectlevel3">
-<li><a href="#_zweck_des_teilprojekts_2">2.2.1. Zweck des Teilprojekts</a></li>
+<li><a href="#_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</a></li>
 <li><a href="#_programmierspracheentwicklungsumgebung_2">2.2.2. Programmiersprache/Entwicklungsumgebung</a></li>
 <li><a href="#_verwendete_bibliothekenframeworks_2">2.2.3. Verwendete Bibliotheken/Frameworks</a></li>
 <li><a href="#_datenbanksystem">2.2.4. Datenbanksystem</a></li>
@@ -496,9 +496,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_einleitung">1. Einleitung</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ziele">1.1. Ziele</h3>
+<h3 id="_nutzen_des_leitrechners">1.1. Nutzen des Leitrechners</h3>
 <div class="paragraph">
-<p>Es solle ein Programm entstehen, das Daten aus der Datenbank holt und dies an verschiedenste Programme weiterleitet. Bei uns sind momentan die Verbindnung zwischen Fertiungsstraße und Datenbank realisiert.</p>
+<p>Es soll ein Programm entstehen, das den Austausch von Daten zwischen zwei Schnitstellen vereinfachen soll. Der Datenaustausch zwischen Fertigunsstraße und Datenbank wurde hier durch den Leitrechner vereinfacht.</p>
 </div>
 </div>
 <div class="sect2">
@@ -553,10 +553,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_teilprojekt_leitrechner">2.1. Teilprojekt Leitrechner</h3>
-<div class="sect3">
-<h4 id="_zweck_des_teilprojekts">2.1.1. Zweck des Teilprojekts</h4>
+<div class="imageblock right">
+<div class="content">
+<img src="./images/uebersicht.png" alt="Überischt" width="80%">
+</div>
+<div class="title">Abbildung 1. Übersicht Carlos</div>
+</div>
 <div class="paragraph">
-<p>Damit die <strong>Fertigungsstraße</strong> die Aufträge aus der <strong>Datenbank</strong> bearbeiten kann, müssen diese erst dorthin gelangen. Man hat sich dazu entschieden, diese Aufgabe zu übernehmen und durch <strong>Sockets</strong> zu realisieren.</p>
+<p>Der Webservice speichert die Aufträge, die vom <strong>JavaFX Client</strong>, der <strong>Android App</strong> und der <strong>Webpage</strong> gesendet werden und speichert diese in der Datenbank.<br>
+Man holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.</p>
+</div>
+<div class="sect3">
+<h4 id="_umsetztung">2.1.1. Umsetztung</h4>
+<div class="paragraph">
+<p>Wir haben uns entschieden die Leitrechner Kommunikation durch Sockets umzusetzen. Der Grund <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">Sockets</a> zu verwenden ist das eine Gruppe sich im vorherigen Projekt schon mit Sockets auseinandergesetzt hat und dies den Recherche Zeitraum stark verringert.</p>
 </div>
 </div>
 <div class="sect3">
@@ -568,7 +578,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="_verwendete_bibliothekenframeworks">2.1.3. Verwendete Bibliotheken/Frameworks</h4>
 <div class="paragraph">
-<p>Es wird die Libraries <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">java.net.Socket</a> und <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">java.net.ServerSocket</a> für die Kommunikation zwischen Client und Server verwendet.</p>
+<p>Es wird die Libraries java.net.Socket und <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">java.net.ServerSocket</a> für die Kommunikation zwischen Client und Server verwendet.</p>
 </div>
 </div>
 <div class="sect3">
@@ -609,70 +619,48 @@ Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benöti
 </li>
 <li>
 <p>Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe <a href="#_database_manager">Database Manager</a>) über die Socket Verbindung (<strong>output.println()</strong>) an den Client.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">} else if(answer.equals("bereit")){
+    orderMsg = getMessage();
+    System.out.println("Output: " + orderMsg);
+    output.println(orderMsg);
+}</code></pre>
+</div>
+</div>
 </li>
 <li>
 <p>Nachdem der Auftrag fertig produziert wurde, sendet der Client die Auftragsnummer des produzierten Produkts und einen Status, z. B. "bereit", um den nächsten Auftrag zu bekommen oder "exit", um den Client und Server zu beenden, zurück.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="java">while (!stop) {
-    // Wenn keine offenen Aufträge in der Liste sind holl alle neuen offenen aus der DB
-    if (orders.size() == 0) {
-        orders = DatabaseManager.getNewAuftrage(lastRead);
-    }
     // Lese Nachricht vom Client
     answer = input.readLine();
     System.out.println("Input: " + answer);
-    // Wenn jemand manuell "" sendet oder einfach Enter drückt
-    if (answer == null) {
-        output.println("Bitte Status senden!");
-    // Wenn der Client exit sendet wird unser Programm auch "beendet"
-    // bzw. er geht aus der while Schleife raus, aber danach passiert nichts mehr
+    ...
+    // Beende den Loop
     } else if (answer.contains("exit")) {
-        stop = true;
-
-    // Dies sollte nur beim ersten mal senden vorkommen
-    } else if(answer.equals("bereit")){
-        orderMsg = getMessage();
-        System.out.println("Output: " + orderMsg);
-        output.println(orderMsg);
-    // Der Status wird in der DB aktuallisiert,
-    // der fertige Auftrag aus der Liste entfernt,
-    // der neue Auftrag wird aus der Liste geholt und an den Client gesendet.
-    } else if (answer.contains("bereit")) {
-        DatabaseManager.setStatus(answer.split(";")[0], "fertig");
-        orders.remove(0);
-        orderMsg = getMessage();
-        System.out.println("Output: " + orderMsg);
-        output.println(orderMsg);
-
-    } else if (answer.contains("lauft")){
-        System.out.println("läuft");
-    // Wenn nichts zutrifft, mach weiter
-    } else {
-        continue;
-    }
-    oldOrder = orders.get(0);
-}</code></pre>
+        stop = true;</code></pre>
 </div>
 </div>
 </li>
 <li>
 <p>Wenn ein "bereit" gesendet wird, wird in der Datenbank der Status des Auftrag mit der gesendeten Id auf "fertig" gesetzt und der nächste Auftrag an den Client geschickt.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">} else if (answer.contains("bereit")) {
+    // Der Status wird in der DB aktuallisiert,
+    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+    // der fertige Auftrag aus der Liste entfernt,
+    orders.remove(0);
+    // der neue Auftrag wird aus der Liste geholt und an den Client gesendet.
+    orderMsg = getMessage();
+    System.out.println("Output: " + orderMsg);
+    output.println(orderMsg);</code></pre>
+</div>
+</div>
 </li>
 </ol>
-</div>
-<div class="sect4">
-<h5 id="_zweck_des_leitrechners">2.1.5.1. Zweck des Leitrechners</h5>
-<div class="imageblock right">
-<div class="content">
-<img src="./images/uebersicht.png" alt="Überischt" width="80%">
-</div>
-<div class="title">Abbildung 1. Übersicht Carlos</div>
-</div>
-<div class="paragraph">
-<p>Der Webservice speichert die Aufträge, die vom <strong>JavaFX Client</strong>, der <strong>Android App</strong> und der <strong>Webpage</strong> gesendet werden und speichert diese in der Datenbank.<br>
-Man holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.</p>
-</div>
 </div>
 </div>
 <div class="sect3">
@@ -732,7 +720,7 @@ Mögliche Funktionen währen das Starten und Stoppen des Servers und das Anzeige
 <div class="sect2">
 <h3 id="_teilprojekt_webapp">2.2. Teilprojekt Webapp</h3>
 <div class="sect3">
-<h4 id="_zweck_des_teilprojekts_2">2.2.1. Zweck des Teilprojekts</h4>
+<h4 id="_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</h4>
 <div class="paragraph">
 <p>Die Webapplikation dient zur (firmeninternen) grafischen Darstellung von Aufträgen.</p>
 </div>
@@ -853,14 +841,19 @@ Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON) wird darau
 </div>
 <div class="sect2">
 <h3 id="_quellen">3.2. Quellen</h3>
-
+<div class="paragraph">
+<p><a href="https://www.baeldung.com/a-guide-to-java-sockets">A Guide to Java Sockets</a><br>
+<a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">Oracle Doku ServerSocket</a><br>
+<a href="http://devel1/projekte/BFS2020FI/sockets">Socket Doku Heigl/Frank</a><br>
+<a href="https://zetcode.com/db/mysqljava/">MySQL Java</a></p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-05 09:00:00 +0200
+Last updated 2022-07-06 10:00:56 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
