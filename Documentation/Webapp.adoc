@@ -27,6 +27,7 @@ Die Funktionsfähigkeit der Webapplikation wurde manuell, mithilfe von 'White-Bo
 Dabei haben die Testpersonen Kenntnisse über den Code.
 
 === User Interface
+.Webapp UI
 image::ui-webapp.png[User Interface Webapp]
 Durch Eingabe von entweder Auftragsnummer, Produkt-Id, Produkt-Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt. +
 Ein leer lassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.
@@ -53,7 +54,7 @@ app.listen(3000)
 REST-api: bei einer Get-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet. +
 Das 'app.listen(<port>)' sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.
 
-Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf. 
+Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf.
 Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON-Object) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im DOM erzeugt und in die Webapplikation einfügt.
 
 '''

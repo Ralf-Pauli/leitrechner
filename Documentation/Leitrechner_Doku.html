@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.15">
 <meta name="application-name" content="Leitrechner Dokumentation">
-<meta name="author" content=":">
+<meta name="author" content="Michael Krebs, Ralf Pauli">
 <title>Projektdokumentation Leitrechner</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -449,30 +449,35 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#_einleitung">1. Einleitung</a>
 <ul class="sectlevel2">
-<li><a href="#_ziele">1.1. Ziele</a></li>
+<li><a href="#_nutzen_des_leitrechners">1.1. Nutzen des Leitrechners</a></li>
 <li><a href="#_aufgabenverteilung">1.2. Aufgabenverteilung</a></li>
 </ul>
 </li>
 <li><a href="#_teilprojekt">2. Teilprojekt</a>
 <ul class="sectlevel2">
-<li><a href="#_teilprprojekt_leitrechner">2.1. Teilprprojekt Leitrechner</a>
+<li><a href="#_teilprojekt_leitrechner">2.1. Teilprojekt Leitrechner</a>
 <ul class="sectlevel3">
-<li><a href="#_allgemeines">2.1.1. Allgemeines</a></li>
-<li><a href="#_database_manager">2.1.2. Database Manager</a></li>
-<li><a href="#_probleme">2.1.3. Probleme</a></li>
-<li><a href="#_ausblick_auf_mögliche_erweiterungen">2.1.4. Ausblick auf mögliche Erweiterungen</a></li>
+<li><a href="#_umsetztung">2.1.1. Umsetztung</a></li>
+<li><a href="#_programmierspracheentwicklungsumgebung">2.1.2. Programmiersprache/Entwicklungsumgebung</a></li>
+<li><a href="#_verwendete_bibliothekenframeworks">2.1.3. Verwendete Bibliotheken/Frameworks</a></li>
+<li><a href="#_verwendete_schnittstellen_im_projekt">2.1.4. Verwendete Schnittstellen im Projekt</a></li>
+<li><a href="#_ablauf">2.1.5. Ablauf</a></li>
+<li><a href="#_database_manager">2.1.6. Database Manager</a></li>
+<li><a href="#_probleme">2.1.7. Probleme</a></li>
+<li><a href="#_ausblick_auf_mögliche_erweiterungen">2.1.8. Ausblick auf mögliche Erweiterungen</a></li>
 </ul>
 </li>
 <li><a href="#_teilprojekt_webapp">2.2. Teilprojekt Webapp</a>
 <ul class="sectlevel3">
 <li><a href="#_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</a></li>
 <li><a href="#_programmierspracheentwicklungsumgebung_2">2.2.2. Programmiersprache/Entwicklungsumgebung</a></li>
-<li><a href="#_verwendete_bibliothekenframeworks">2.2.3. Verwendete Bibliotheken/Frameworks</a></li>
+<li><a href="#_verwendete_bibliothekenframeworks_2">2.2.3. Verwendete Bibliotheken/Frameworks</a></li>
 <li><a href="#_datenbanksystem">2.2.4. Datenbanksystem</a></li>
-<li><a href="#_verwendete_schnittstellen_im_projekt">2.2.5. Verwendete Schnittstellen im Projekt</a></li>
+<li><a href="#_verwendete_schnittstellen_im_projekt_2">2.2.5. Verwendete Schnittstellen im Projekt</a></li>
 <li><a href="#_wie_wurde_getestet">2.2.6. Wie wurde getestet</a></li>
 <li><a href="#_user_interface">2.2.7. User Interface</a></li>
 <li><a href="#_funktion">2.2.8. Funktion</a></li>
+<li><a href="#_probleme_2">2.2.9. Probleme</a></li>
 </ul>
 </li>
 </ul>
@@ -491,9 +496,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_einleitung">1. Einleitung</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_ziele">1.1. Ziele</h3>
+<h3 id="_nutzen_des_leitrechners">1.1. Nutzen des Leitrechners</h3>
 <div class="paragraph">
-<p>Es solle ein Programm entstehen, das Daten aus der Datenbank holt und dies an verschiedenste Programme weiterleitet. Bei uns sind momentan die Verbindnung zwischen Fertiungsstraße und Datenbank realisiert.</p>
+<p>Es soll ein Programm entstehen, das den Austausch von Daten zwischen zwei Schnitstellen vereinfachen soll. Der Datenaustausch zwischen Fertigunsstraße und Datenbank wurde hier durch den Leitrechner vereinfacht.</p>
 </div>
 </div>
 <div class="sect2">
@@ -547,50 +552,61 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_teilprojekt">2. Teilprojekt</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_teilprprojekt_leitrechner">2.1. Teilprprojekt Leitrechner</h3>
-<div class="sect3">
-<h4 id="_allgemeines">2.1.1. Allgemeines</h4>
-<div class="paragraph">
-<p>Damit die Fertigunsstraße die Aufträge aus der Datenbank bearbeiten kann, müssen diese erst dorthin gelangen. Wir haben uns entschieden diese Aufgabe zu übernehemen und durch Sockets zu realisieren.</p>
+<h3 id="_teilprojekt_leitrechner">2.1. Teilprojekt Leitrechner</h3>
+<div class="imageblock right">
+<div class="content">
+<img src="./images/uebersicht.png" alt="Überischt" width="80%">
 </div>
-<div class="sect4">
-<h5 id="_schnittstellen">2.1.1.1. Schnittstellen</h5>
+<div class="title">Abbildung 1. Übersicht Carlos</div>
+</div>
+<div class="paragraph">
+<p>Der Webservice speichert die Aufträge, die vom <strong>JavaFX Client</strong>, der <strong>Android App</strong> und der <strong>Webpage</strong> gesendet werden und speichert diese in der Datenbank.<br>
+Man holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.</p>
+</div>
+<div class="sect3">
+<h4 id="_umsetztung">2.1.1. Umsetztung</h4>
+<div class="paragraph">
+<p>Wir haben uns entschieden die Leitrechner Kommunikation durch Sockets umzusetzen. Der Grund <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">Sockets</a> zu verwenden ist das eine Gruppe sich im vorherigen Projekt schon mit Sockets auseinandergesetzt hat und dies den Recherche Zeitraum stark verringert.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_programmierspracheentwicklungsumgebung">2.1.2. Programmiersprache/Entwicklungsumgebung</h4>
+<div class="paragraph">
+<p>Es wird die Programmiersprache <a href="https://www.java.com/de/">Java</a> in der Version 1.8 und die Java-IDE <a href="https://www.jetbrains.com/de-de/idea/">IntelliJ</a> von <a href="https://www.jetbrains.com/de-de/">JetBrains</a> verwendet, um das Projekt zu verwirklichen.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_verwendete_bibliothekenframeworks">2.1.3. Verwendete Bibliotheken/Frameworks</h4>
+<div class="paragraph">
+<p>Es wird die Libraries java.net.Socket und <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">java.net.ServerSocket</a> für die Kommunikation zwischen Client und Server verwendet.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_verwendete_schnittstellen_im_projekt">2.1.4. Verwendete Schnittstellen im Projekt</h4>
 <div class="ulist">
 <ul>
 <li>
 <p>Datenbanksystem:</p>
 <div class="paragraph">
-<p>Wir verwenden eine <a href="https://www.mysql.com/de/">MySql</a> Datenbank die auf <a href="http://devel1/phpmyadmin/">Devel1</a> erreichbar ist.
-Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigen wir nur die Aufträge und Produkte.</p>
+<p>Man verwendet eine <a href="https://www.mysql.com/de/">MySQL</a> Datenbank, die auf <a href="http://devel1/phpmyadmin/">Devel1</a> erreichbar ist.
+Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigt man nur die Aufträge und Produkte.</p>
 </div>
 </li>
 <li>
 <p>Fertigungsstraße</p>
 <div class="paragraph">
-<p>Wir verbinden uns über eine Socket Verbindung zu der Fertigunsstraße. Wir machen dies um Daten aus der Datenbank zu holen und diese an die Fertigungsstraße weiterzuleiten.</p>
+<p>Man verbindet sich über eine Socket Verbindung zu der Fertigungsstraße. Man macht dies, um Daten aus der Datenbank zu holen und diese an die Fertigungsstraße weiterzuleiten.</p>
 </div>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_bibliotheken">2.1.1.2. Bibliotheken</h5>
-<div class="paragraph">
-<p>Es wird die Libraries <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">java.net.Socket</a> und <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">java.net.ServerSocket</a> für die Kommunikation zwischen Client und Server verwendet.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_programmierspracheentwicklungsumgebung">2.1.1.3. Programmiersprache/Entwicklungsumgebung</h5>
-<div class="paragraph">
-<p>Es wird die Programmiersprache <a href="https://www.java.com/de/">Java</a> in der Version 1.8 und die Java-IDE <a href="https://www.jetbrains.com/de-de/idea/">IntelliJ</a> von <a href="https://www.jetbrains.com/de-de/">JetBrains</a> benutzt, um das Projekt zu verwirklichen.</p>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_ablauf">2.1.1.4. Ablauf</h5>
+<div class="sect3">
+<h4 id="_ablauf">2.1.5. Ablauf</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Es wird ein Verbindung zum Socket Client aufgebaut.</p>
+<p>Es wird eine Verbindung zum Socket Client aufgebaut.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="java">public static void openConnection() {
@@ -602,100 +618,103 @@ Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benöti
 </div>
 </li>
 <li>
-<p>Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe <a href="#_database_manager">Database Manager</a>) über die Konsole an den Client.</p>
-</li>
-<li>
-<p>Nachdem der Auftrag fertig produziert wurde, sendet der Cient die Auftragsnummer des produzierten Produkts und einen Status, z. B. "bereit" um den nächsten Auftrag zu bekommen oder "exit" um den Client und Server zu beenden, zurück.</p>
+<p>Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe <a href="#_database_manager">Database Manager</a>) über die Socket Verbindung (<strong>output.println()</strong>) an den Client.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code data-lang="java">while (!stop) {
-    // Wenn keine offenen Aufträge in der Liste sind holl alle neuen offenen aus der DB
-    if (orders.size() == 0) {
-        orders = DatabaseManager.getNewAuftrage(lastRead);
-    }
-    // Lese Nachricht vom Client
-    answer = input.readLine();
-    System.out.println("Input: " + answer);
-    // Wenn jemand manuell "" sendet oder einfach Enter drückt
-    if (answer == null) {
-        output.println("Bitte Status senden!");
-    // Wenn der Client exit sendet wird unser Programm auch "beendet"
-    // bzw. er geht aus der while Schleife raus, aber danach passiert nichts mehr
-    } else if (answer.contains("exit")) {
-        stop = true;
-
-    // Dies sollte nur beim ersten mal senden vorkommen
-    } else if(answer.equals("bereit")){
-        orderMsg = getMessage();
-        System.out.println("Output: " + orderMsg);
-        output.println(orderMsg);
-    // Der Status wird in der DB aktuallisiert,
-    // der fertige Auftrag aus der Liste entfernt,
-    // der neue Auftrag wird aus der Liste geholt und an den Client gesendet.
-    } else if (answer.contains("bereit")) {
-        DatabaseManager.setStatus(answer.split(";")[0], "fertig");
-        orders.remove(0);
-        orderMsg = getMessage();
-        System.out.println("Output: " + orderMsg);
-        output.println(orderMsg);
-
-    } else if (answer.contains("lauft")){
-        System.out.println("läuft");
-    // Wenn nichts zutrifft, mach weiter
-    } else {
-        continue;
-    }
-    oldOrder = orders.get(0);
+<pre class="prettyprint highlight"><code data-lang="java">} else if(answer.equals("bereit")){
+    orderMsg = getMessage();
+    System.out.println("Output: " + orderMsg);
+    output.println(orderMsg);
 }</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Wenn ein "bereit" gesendet wird, wird in der Datenbank der Status des Auftrag mit der gesendeten Id auf "fertig" gesetz und der nächste Auftrag an den Client geschickt.</p>
+<p>Nachdem der Auftrag fertig produziert wurde, sendet der Client die Auftragsnummer des produzierten Produkts und einen Status, z. B. "bereit", um den nächsten Auftrag zu bekommen oder "exit", um den Client und Server zu beenden, zurück.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">while (!stop) {
+    // Lese Nachricht vom Client
+    answer = input.readLine();
+    System.out.println("Input: " + answer);
+    ...
+    // Beende den Loop
+    } else if (answer.contains("exit")) {
+        stop = true;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Wenn ein "bereit" gesendet wird, wird in der Datenbank der Status des Auftrag mit der gesendeten Id auf "fertig" gesetzt und der nächste Auftrag an den Client geschickt.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">} else if (answer.contains("bereit")) {
+    // Der Status wird in der DB aktuallisiert,
+    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+    // der fertige Auftrag aus der Liste entfernt,
+    orders.remove(0);
+    // der neue Auftrag wird aus der Liste geholt und an den Client gesendet.
+    orderMsg = getMessage();
+    System.out.println("Output: " + orderMsg);
+    output.println(orderMsg);</code></pre>
+</div>
+</div>
 </li>
 </ol>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_zweck_des_leitrechners">2.1.1.5. Zweck des Leitrechners</h5>
-<div class="imageblock right">
-<div class="content">
-<img src="./images/uebersicht.png" alt="Überischt" width="80%">
-</div>
-<div class="title">Abbildung 1. Übersicht Carlos</div>
-</div>
+<div class="sect3">
+<h4 id="_database_manager">2.1.6. Database Manager</h4>
 <div class="paragraph">
-<p>Der Webservice speichert die Aufträge die vom <strong>JavaFX Client</strong>, der <strong>Android App</strong> und der <strong>Webpage</strong> gesendet werden und speichert diese in der Datenbank.<br>
-Wir holen alle noch offenen Aufträge aus der Datenbank und senden diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegen wir eine Rückmeldung und ändern den Status des Auftrags in der Datenbank.</p>
-</div>
+<p>Man benutzt die <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html">Java SQL Libary</a> für den Zugriff auf die MySql Datenank.
+Man benutzt die Java SQL Libary für den Zugriff auf die MySQL Datenbank. In der Database Manager Klasse hat man eine getNewAuftraege Methode erstellt, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt.<br>
+Damit der Status des Auftrags nach der Produktion geändert werden kann haben wir die setStatus Methode erstellt, welche ein Update durchführt, um den Status an der entsprechenden Id änder</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_database_manager">2.1.2. Database Manager</h4>
-<div class="paragraph">
-<p>Wir benutzen die <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html">Java Sql Libary</a> für den Zugriff auf die MySql Datenank.
-In der Database Mananger Klasse haben wir ein <strong>getNewAuftraege</strong> Methode, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt.</p>
-</div>
-<div class="paragraph">
-<p>Damit der Status des Auftrag nach der Produktion geändert werden kann haben wir die <strong>setStatus</strong> Methode erstellt, welche ein Update durchführt um den Status an der entsprechenden Id ändert.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_probleme">2.1.3. Probleme</h4>
+<h4 id="_probleme">2.1.7. Probleme</h4>
 <div class="ulist">
 <ul>
 <li>
-<p>Beim Start des Programms, wird um die Kommunikation zu starten ein "beginn" vom Client zum Server gesendet. Allerdings ist hinter dem "beginn" kein Auftrag hinterlegt, deshalb soll auch nichts in der Datenbank aktualisiert werden und es soll auch kein Element aus der Auftrag Liste entfernt werden.</p>
-</li>
-<li>
-<p>Wir haben versucht ein Sql Statement zu schreiben welches die Parameter ignoriert zu denen kein wert zugordet ist, allerdings hat dies nach langen testen und probieren nicht funktionet. Deswegen haben wir uns dazu entschieden ein Sql Statemnt abhängig von übergebenen Parametern zusammenzubauen.</p>
+<p>Beim Start des Programms, wird um die Kommunikation zu starten ein "begin" vom Client zum Server gesendet. Allerdings ist hinter dem "begin" kein Auftrag hinterlegt, deshalb soll auch nichts in der Datenbank aktualisiert werden und es soll auch kein Element aus der Auftrag Liste entfernt werden.<br>
+Man hatte das Problem das der erste Auftrag schon auf "fertig" gesetzt wurde, bevor er durch die Fertigungsstraße gelaufen ist.<br>
+Gelöst wurde dies indem wir eienen weiteren if-Fall hinzugefügt haben der schaut ob die Nachricht vom Client nur "begin" enthällt und keine Auftragsnummmer.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="java">...
+} else if(answer.equals("bereit")){
+    orderMsg = getMessage();
+    System.out.println("Output: " + orderMsg);
+    output.println(orderMsg);
+
+} else if (answer.contains("bereit")) {
+    DatabaseManager.setStatus(answer.split(";")[0], "fertig");
+    orders.remove(0);
+    orderMsg = getMessage();
+    System.out.println("Output: " + orderMsg);
+    output.println(orderMsg);
+}
+...</code></pre>
+</div>
+</div>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_ausblick_auf_mögliche_erweiterungen">2.1.4. Ausblick auf mögliche Erweiterungen</h4>
-
+<h4 id="_ausblick_auf_mögliche_erweiterungen">2.1.8. Ausblick auf mögliche Erweiterungen</h4>
+<div class="paragraph">
+<p>Das Programm könnte bereits im aktuellen Entwicklungsstadium verwendet werden. Würde das Projekt weiter bearbeitet werden gäbe es jedoch noch eine Vielzahl an sinnvollen Erweiterungen, die ich kurz anreißen möchte.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Eine Graphische Anwendung</strong><br>
+Momentan wird die ganze Kommunikation in der Konsole dargestellt, um dies Benutzerfreundlicher zu machen hatte man die Idee eine GUI zur Steurung, Überprüfung und Testung der Daten zu erstellen.<br>
+Mögliche Funktionen währen das Starten und Stoppen des Servers und das Anzeigen der Kommunikation mit Zeitstempel in einer Tabelle.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -716,12 +735,12 @@ Gearbeitet wurde mithilfe der Jetbrains IDE <a href="https://www.jetbrains.com/p
 </div>
 </div>
 <div class="sect3">
-<h4 id="_verwendete_bibliothekenframeworks">2.2.3. Verwendete Bibliotheken/Frameworks</h4>
+<h4 id="_verwendete_bibliothekenframeworks_2">2.2.3. Verwendete Bibliotheken/Frameworks</h4>
 <div class="paragraph">
 <p>Ein fundamentales Framework ist <a href="https://expressjs.com/">Express JS</a> mit der verwendeten, zurzeit aktuellsten Version, <a href="https://www.npmjs.com/package/express">4.18.1(npm)</a>
 Dieses ermöglicht ein einfaches und unkompliziertes Bereitstellen von APIs. Diese werden auch zum Bereitstellen von der Webapplikation genutzt.<br>
 Das Framework <a href="https://pugjs.org/">PugJS</a>, Version <a href="https://npmjs.com/package/pug">3.0.2(npm)</a> ist eine Engine, die dazu genutzt wird, pug-Syntax in HTML-Code zu rendern.<br>
-Außerdem erlaubt Pug ein vereinfachtes Nutzen von JavaScript Ausdrücke zu implementieren.</p>
+Außerdem erlaubt Pug ein vereinfachtes nutzen von JavaScript Ausdrücke zu implementieren.</p>
 </div>
 </div>
 <div class="sect3">
@@ -731,7 +750,7 @@ Außerdem erlaubt Pug ein vereinfachtes Nutzen von JavaScript Ausdrücke zu impl
 </div>
 </div>
 <div class="sect3">
-<h4 id="_verwendete_schnittstellen_im_projekt">2.2.5. Verwendete Schnittstellen im Projekt</h4>
+<h4 id="_verwendete_schnittstellen_im_projekt_2">2.2.5. Verwendete Schnittstellen im Projekt</h4>
 <div class="paragraph">
 <p>Die Datenbank wird für Aufträge angefragt</p>
 </div>
@@ -749,10 +768,11 @@ Dabei haben die Testpersonen Kenntnisse über den Code.</p>
 <div class="content">
 <img src="./images/ui-webapp.png" alt="User Interface Webapp">
 </div>
+<div class="title">Abbildung 2. Webapp UI</div>
 </div>
 <div class="paragraph">
-<p>Durch Eingabe von entweder Auftragsnummer, Produkt-Id, Produkt-Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt.<br>
-Ein leer lassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.</p>
+<p>Durch Eingabe von entweder Auftragsnummer, Produkt Id, Produkt Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt.<br>
+Ein leerlassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.</p>
 </div>
 </div>
 <div class="sect3">
@@ -780,23 +800,7 @@ app.listen(3000)</code></pre>
 <p>REST-api: bei einer Get-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet.<br>
 Das 'app.listen(&lt;port&gt;)' sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.</p>
 </div>
-<div class="paragraph">
-<p>Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf.
-Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON-Object) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im DOM erzeugt und in die Webapplikation einfügt.</p>
-</div>
-<hr>
-<div class="imageblock">
-<div class="content">
-<img src="./images/wappfd.svg" alt="Static" width="450">
-</div>
-<div class="title">Abbildung 2. Flussdiagramm</div>
-</div>
-<div class="paragraph">
-<p>Die Funktion der Webapplikation lässt sich durch ein Flussdiagramm vereinfacht darstellen.<br>
-Vom Client wird, durch das Drücken eines Buttons, die Funktion <strong>'getOrders()'</strong> aus <strong>'script.js'</strong> aufgerufen.</p>
-</div>
 <div class="listingblock">
-<div class="title"><strong>script.js</strong></div>
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="javscript">function getOrders() {
     let params = new URLSearchParams();
@@ -810,59 +814,18 @@ Vom Client wird, durch das Drücken eines Buttons, die Funktion <strong>'getOrde
 </div>
 </div>
 <div class="paragraph">
-<p>Diese sendet einen HTTP GET-Request (fetch), an eine davor konfigurierte URI in der Server API.</p>
-</div>
-<div class="listingblock">
-<div class="title"><strong>server.js</strong></div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="javscript">const sql = require('../public/javascript/connect.js')
-...
-app.get("/getOrders", (req, res) =&gt; {
-    const id = req.query.id;
-    const produkt_id = req.query.pId;
-    const produkt_anzahl = req.query.pAnz;
-    const status = req.query.status;
-    sql.getJsonData(id, produkt_id, produkt_anzahl, status).then((result) =&gt; {
-        res.send(result)
-    })
-})
-...</code></pre>
+<p>Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf.
+Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im HTML erzeugt.</p>
 </div>
 </div>
-<div class="paragraph">
-<p>Die API liest, auf einen Request hin, die Variable <strong>'getJsonData'</strong> des Scripts
-<strong>'connect.js'</strong> und sendet die erhaltenen Daten an den Client.</p>
-</div>
-<div class="listingblock">
-<div class="title"><strong>connect.js</strong></div>
-<div class="content">
-<pre class="prettyprint highlight"><code data-lang="javascript">let getJsonData = function getData(id = null, produkt_id = null, produkt_anzahl = null, status = null) {
-let count = 0;
-return new Promise((resolve) =&gt; {
-let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
-
-        if (id !== null) {
-            query = check(query, count);
-            query += " id = " + mysql.escape(id);
-            count++;
-        }
-        ...
-        connection.query(query, function (err, result) {
-            try {
-                console.log(result);
-                resolve(convertToJson(result));
-            } catch (error) {
-                console.log(err);
-            }
-        });
-    });
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Beim Versuch die Variable auszulesen wird die function getData ausgeführt.
-Diese baut aus den übergebenen Parametern eine SQL-Query und sendet die Abfrage an die Datenbank.
-Die Antwort vom Datenbankserver wird daraufhin in ein JSON-Object umgewandelt</p>
+<div class="sect3">
+<h4 id="_probleme_2">2.2.9. Probleme</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Wir haben versucht ein SQL Statement zu schreiben, welches die Parameter ignoriert, zu denen kein wert zugeordnet ist, allerdings hat dies nach langen testen und probieren nicht funktioniert. Deswegen haben wir uns dazu entschieden ein SQL Statement abhängig von übergebenen Parametern zusammenzubauen.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -873,18 +836,24 @@ Die Antwort vom Datenbankserver wird daraufhin in ein JSON-Object umgewandelt</p
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_glossar">3.1. Glossar</h3>
-
+<table class="tableblock frame-all grid-all stretch">
+</table>
 </div>
 <div class="sect2">
 <h3 id="_quellen">3.2. Quellen</h3>
-
+<div class="paragraph">
+<p><a href="https://www.baeldung.com/a-guide-to-java-sockets">A Guide to Java Sockets</a><br>
+<a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">Oracle Doku ServerSocket</a><br>
+<a href="http://devel1/projekte/BFS2020FI/sockets">Socket Doku Heigl/Frank</a><br>
+<a href="https://zetcode.com/db/mysqljava/">MySQL Java</a></p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-05 10:53:35 +0200
+Last updated 2022-07-06 10:00:56 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
