@@ -1,7 +1,5 @@
 :numbered:
 == Teilprojekt Webapp
-
-=== Zweck des Teilprojekts
 Die Webapplikation dient zur (firmeninternen) grafischen Darstellung von Aufträgen.
 
 === Programmiersprache/Entwicklungsumgebung
@@ -17,10 +15,10 @@ Das Framework link:https://pugjs.org/[PugJS], Version link:https://npmjs.com/pac
 Außerdem erlaubt Pug ein vereinfachtes Nutzen von JavaScript Ausdrücke zu implementieren.
 
 === Datenbanksystem
-Eine auf Devel1, zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API, zur weiteren Verwendung bereitzustellen.
+Eine auf Devel1, zur Verfügung gestellte Datenbank, wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API, zur weiteren Verwendung bereitzustellen.
 
 === Verwendete Schnittstellen im Projekt
-Die Datenbank wird für Aufträge angefragt
+Die Schnittstelle Datenbank wurde genutzt, um Aufträge abzufragen.
 
 === Wie wurde getestet
 Die Funktionsfähigkeit der Webapplikation wurde manuell, mithilfe von 'White-Box-Testing', getestet.
@@ -30,7 +28,7 @@ Dabei haben die Testpersonen Kenntnisse über den Code.
 .Webapp UI
 image::ui-webapp.png[User Interface Webapp]
 Durch Eingabe von entweder Auftragsnummer, Produkt-Id, Produkt-Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt. +
-Ein leer lassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.
+Ein leer lassen dieser Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.
 
 === Funktion
 
@@ -51,18 +49,18 @@ app.set('view engine', 'pug')
 app.listen(3000)
 ----
 
-REST-api: bei einer Get-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet. +
-Das 'app.listen(<port>)' sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.
+REST-api: Bei einer GET-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet. +
+Das *app.listen(<port>)* sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.
 
-Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf.
-Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON-Object) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im DOM erzeugt und in die Webapplikation einfügt.
+Der Suche-Button in der Anwendung ruft die Methode *getOrders()* in script.js auf.
+Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON-Object) wird darauf an die Methode *generate_table(data)* weitergereicht, die dann eine Tabelle im DOM erzeugt und in die Webapplikation einfügt.
 
 '''
 .Flussdiagramm
 image::wappfd.svg[Static, 450]
 
 Die Funktion der Webapplikation lässt sich durch ein Flussdiagramm vereinfacht darstellen. +
-Vom Client wird, durch das Drücken eines Buttons, die Funktion *'getOrders()'* aus *'script.js'* aufgerufen.
+Vom Client wird, durch das Drücken eines Buttons, die Funktion *getOrders()* aus *script.js* aufgerufen.
 [source,javscript]
 .*script.js*
 ----
@@ -94,8 +92,8 @@ app.get("/getOrders", (req, res) => {
 })
 ...
 ----
-Die API liest, auf einen Request hin, die Variable *'getJsonData'* des Scripts
-*'connect.js'* und sendet die erhaltenen Daten an den Client.
+Die API liest, auf einen Request hin, die Variable *getJsonData* des Scripts
+*connect.js* und sendet die erhaltenen Daten an den Client.
 [source,javascript]
 .*connect.js*
 ----
@@ -121,6 +119,69 @@ let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
     });
 }
 ----
-Beim Versuch die Variable auszulesen wird die function getData ausgeführt.
+Beim Versuch die Variable auszulesen wird die function *getData()* ausgeführt.
 Diese baut aus den übergebenen Parametern eine SQL-Query und sendet die Abfrage an die Datenbank.
 Die Antwort vom Datenbankserver wird daraufhin in ein JSON-Object umgewandelt und an den vorher genannten fetch Befehl weitergereicht.
+
+Auf Erhalt des Json-Object's wird dieser an die *generate_table()* weitergereicht, die dann aus den erhaltenen Werten eine Tabelle generiert und in die Seite einfügt.
+[source, javascript]
+----
+function generate_table(json) {
+
+    let body = document.getElementsByTagName("body")[0];
+
+    // If table exists -> Delete | Same with InfoBox
+    let tDelete = document.getElementById("datatable");
+    tDelete != null ? tDelete.parentNode.removeChild(tDelete) : null
+    let iBDelete = document.getElementById('i-box');
+    iBDelete != null ? iBDelete.parentNode.removeChild(iBDelete):null;
+
+    if (json.length === 0){
+        let infoBox = document.createElement('div');
+        infoBox.setAttribute('id', 'i-box');
+        infoBox.appendChild(document.createTextNode("Nichts gefunden"));
+        body.appendChild(infoBox);
+        infoBox.classList.add('zoomed');
+        requestAnimationFrame(() => {
+            infoBox.classList.remove('zoomed')
+        })
+    }
+
+    // Table
+    let table = document.createElement("table");
+    table.setAttribute("id", "datatable")
+    table.setAttribute("class", "styled-table")
+    table.classList.add('zoomed');
+
+    // Table Header
+    let thead = table.createTHead();
+    let row = thead.insertRow();
+    for (let jsonElementKey in json[0]) {
+        let cell = row.insertCell();
+        cell.appendChild(document.createTextNode((jsonElementKey[0].toUpperCase() + jsonElementKey.substring(1))
+            .replace("_", "-")))
+    }
+
+    // Table Data
+    let tbody = table.createTBody();
+
+    json.forEach(obj => {
+        let row = tbody.insertRow();
+        Object.entries(obj).forEach(([key, value]) => {
+            let cell = row.insertCell();
+            cell.appendChild(document.createTextNode(value.toString()));
+        })
+    });
+    body.appendChild(table);
+    requestAnimationFrame(() => {
+       table.classList.remove('zoomed')
+    });
+}
+----
+
+=== Ausblick auf mögliche Erweiterungen
+* Zusätzliche Informationen +
+** Beim Klicken auf einen Auftrag, sollen zusätzliche Informationen auftauchen.
+* Weitere Suchkategorien
+** Es soll die Möglichkeit bestehen, weitere Kategorien wie z.B. Kunden zu suchen.
+** Das könnte durch ein Anmeldefeld vor unerlaubtem Zugang geschützt werden.
