@@ -470,14 +470,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_teilprojekt_webapp">2.2. Teilprojekt Webapp</a>
 <ul class="sectlevel3">
-<li><a href="#_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</a></li>
-<li><a href="#_programmierspracheentwicklungsumgebung_2">2.2.2. Programmiersprache/Entwicklungsumgebung</a></li>
-<li><a href="#_verwendete_bibliothekenframeworks_2">2.2.3. Verwendete Bibliotheken/Frameworks</a></li>
-<li><a href="#_datenbanksystem">2.2.4. Datenbanksystem</a></li>
-<li><a href="#_verwendete_schnittstellen_im_projekt_2">2.2.5. Verwendete Schnittstellen im Projekt</a></li>
-<li><a href="#_wie_wurde_getestet">2.2.6. Wie wurde getestet</a></li>
-<li><a href="#_user_interface">2.2.7. User Interface</a></li>
-<li><a href="#_funktion">2.2.8. Funktion</a></li>
+<li><a href="#_programmierspracheentwicklungsumgebung_2">2.2.1. Programmiersprache/Entwicklungsumgebung</a></li>
+<li><a href="#_verwendete_bibliothekenframeworks_2">2.2.2. Verwendete Bibliotheken/Frameworks</a></li>
+<li><a href="#_datenbanksystem">2.2.3. Datenbanksystem</a></li>
+<li><a href="#_verwendete_schnittstellen_im_projekt_2">2.2.4. Verwendete Schnittstellen im Projekt</a></li>
+<li><a href="#_wie_wurde_getestet">2.2.5. Wie wurde getestet</a></li>
+<li><a href="#_user_interface">2.2.6. User Interface</a></li>
+<li><a href="#_funktion">2.2.7. Funktion</a></li>
+<li><a href="#_ausblick_auf_mögliche_erweiterungen_2">2.2.8. Ausblick auf mögliche Erweiterungen</a></li>
 </ul>
 </li>
 </ul>
@@ -555,7 +555,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_teilprojekt_leitrechner">2.1. Teilprojekt Leitrechner</h3>
 <div class="imageblock right">
 <div class="content">
-<img src="./images/uebersicht.png" alt="Überischt" width="80%">
+<img src="Documentation/images/uebersicht.png" alt="Überischt" width="80%">
 </div>
 <div class="title">Abbildung 1. Übersicht Carlos</div>
 </div>
@@ -719,14 +719,11 @@ Mögliche Funktionen währen das Starten und Stoppen des Servers und das Anzeige
 </div>
 <div class="sect2">
 <h3 id="_teilprojekt_webapp">2.2. Teilprojekt Webapp</h3>
-<div class="sect3">
-<h4 id="_zweck_des_teilprojekts">2.2.1. Zweck des Teilprojekts</h4>
 <div class="paragraph">
 <p>Die Webapplikation dient zur (firmeninternen) grafischen Darstellung von Aufträgen.</p>
 </div>
-</div>
 <div class="sect3">
-<h4 id="_programmierspracheentwicklungsumgebung_2">2.2.2. Programmiersprache/Entwicklungsumgebung</h4>
+<h4 id="_programmierspracheentwicklungsumgebung_2">2.2.1. Programmiersprache/Entwicklungsumgebung</h4>
 <div class="paragraph">
 <p>Wir nutzen <a href="https://nodejs.org">NodeJS</a> als Grundlage für unsere App.
 NodeJS ist eine Laufzeitumgebung, die dazu dient,
@@ -735,7 +732,7 @@ Gearbeitet wurde mithilfe der Jetbrains IDE <a href="https://www.jetbrains.com/p
 </div>
 </div>
 <div class="sect3">
-<h4 id="_verwendete_bibliothekenframeworks_2">2.2.3. Verwendete Bibliotheken/Frameworks</h4>
+<h4 id="_verwendete_bibliothekenframeworks_2">2.2.2. Verwendete Bibliotheken/Frameworks</h4>
 <div class="paragraph">
 <p>Ein fundamentales Framework ist <a href="https://expressjs.com/">Express JS</a> mit der verwendeten, zurzeit aktuellsten Version, <a href="https://www.npmjs.com/package/express">4.18.1(npm)</a>
 Dieses ermöglicht ein einfaches und unkompliziertes Bereitstellen von APIs. Diese werden auch zum Bereitstellen von der Webapplikation genutzt.<br>
@@ -744,39 +741,39 @@ Außerdem erlaubt Pug ein vereinfachtes Nutzen von JavaScript Ausdrücke zu impl
 </div>
 </div>
 <div class="sect3">
-<h4 id="_datenbanksystem">2.2.4. Datenbanksystem</h4>
+<h4 id="_datenbanksystem">2.2.3. Datenbanksystem</h4>
 <div class="paragraph">
-<p>Eine auf Devel1, zur Verfügung gestellte Datenbank wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API, zur weiteren Verwendung bereitzustellen.</p>
+<p>Eine auf Devel1, zur Verfügung gestellte Datenbank, wird genutzt, um Aufträge und Produkte zu selektieren und über eine REST-API, zur weiteren Verwendung bereitzustellen.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_verwendete_schnittstellen_im_projekt_2">2.2.5. Verwendete Schnittstellen im Projekt</h4>
+<h4 id="_verwendete_schnittstellen_im_projekt_2">2.2.4. Verwendete Schnittstellen im Projekt</h4>
 <div class="paragraph">
-<p>Die Datenbank wird für Aufträge angefragt</p>
+<p>Die Schnittstelle Datenbank wurde genutzt, um Aufträge abzufragen.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_wie_wurde_getestet">2.2.6. Wie wurde getestet</h4>
+<h4 id="_wie_wurde_getestet">2.2.5. Wie wurde getestet</h4>
 <div class="paragraph">
 <p>Die Funktionsfähigkeit der Webapplikation wurde manuell, mithilfe von 'White-Box-Testing', getestet.
 Dabei haben die Testpersonen Kenntnisse über den Code.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_user_interface">2.2.7. User Interface</h4>
+<h4 id="_user_interface">2.2.6. User Interface</h4>
 <div class="imageblock">
 <div class="content">
-<img src="./images/ui-webapp.png" alt="User Interface Webapp">
+<img src="Documentation/images/ui-webapp.png" alt="User Interface Webapp">
 </div>
 <div class="title">Abbildung 2. Webapp UI</div>
 </div>
 <div class="paragraph">
 <p>Durch Eingabe von entweder Auftragsnummer, Produkt-Id, Produkt-Anzahl, Status oder auch eine Kombination dieser, wird die Suche spezifiziert und ausgeführt.<br>
-Ein leer lassen der Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.</p>
+Ein leer lassen dieser Suchargumente führt zur Rückgabe der gesamten Datensätze aus der Datenbank.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_funktion">2.2.8. Funktion</h4>
+<h4 id="_funktion">2.2.7. Funktion</h4>
 <div class="paragraph">
 <p><strong>index.js</strong></p>
 </div>
@@ -797,23 +794,23 @@ app.listen(3000)</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>REST-api: bei einer Get-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet.<br>
-Das 'app.listen(&lt;port&gt;)' sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.</p>
+<p>REST-api: Bei einer GET-Anfrage an den Server wird eine Seite mithilfe der Pug-Engine gerendert und an den Client gesendet.<br>
+Das <strong>app.listen(&lt;port&gt;)</strong> sorgt dafür, dass Anfragen an diesen Port angenommen und behandelt werden.</p>
 </div>
 <div class="paragraph">
-<p>Der Suche-Button in der Anwendung ruft die Methode 'getOrders' in script.js auf.
-Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON-Object) wird darauf an die Methode 'generate_table(data)' weitergereicht, die dann eine Tabelle im DOM erzeugt und in die Webapplikation einfügt.</p>
+<p>Der Suche-Button in der Anwendung ruft die Methode <strong>getOrders()</strong> in script.js auf.
+Diese sendet eine HTTP GET-Anfrage an den Server. Die Rückgabe(JSON-Object) wird darauf an die Methode <strong>generate_table(data)</strong> weitergereicht, die dann eine Tabelle im DOM erzeugt und in die Webapplikation einfügt.</p>
 </div>
 <hr>
 <div class="imageblock">
 <div class="content">
-<img src="./images/wappfd.svg" alt="Static" width="450">
+<img src="Documentation/images/wappfd.svg" alt="Static" width="450">
 </div>
 <div class="title">Abbildung 3. Flussdiagramm</div>
 </div>
 <div class="paragraph">
 <p>Die Funktion der Webapplikation lässt sich durch ein Flussdiagramm vereinfacht darstellen.<br>
-Vom Client wird, durch das Drücken eines Buttons, die Funktion <strong>'getOrders()'</strong> aus <strong>'script.js'</strong> aufgerufen.</p>
+Vom Client wird, durch das Drücken eines Buttons, die Funktion <strong>getOrders()</strong> aus <strong>script.js</strong> aufgerufen.</p>
 </div>
 <div class="listingblock">
 <div class="title"><strong>script.js</strong></div>
@@ -850,8 +847,8 @@ app.get("/getOrders", (req, res) =&gt; {
 </div>
 </div>
 <div class="paragraph">
-<p>Die API liest, auf einen Request hin, die Variable <strong>'getJsonData'</strong> des Scripts
-<strong>'connect.js'</strong> und sendet die erhaltenen Daten an den Client.</p>
+<p>Die API liest, auf einen Request hin, die Variable <strong>getJsonData</strong> des Scripts
+<strong>connect.js</strong> und sendet die erhaltenen Daten an den Client.</p>
 </div>
 <div class="listingblock">
 <div class="title"><strong>connect.js</strong></div>
@@ -880,9 +877,97 @@ let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
 </div>
 </div>
 <div class="paragraph">
-<p>Beim Versuch die Variable auszulesen wird die function getData ausgeführt.
+<p>Beim Versuch die Variable auszulesen wird die function <strong>getData()</strong> ausgeführt.
 Diese baut aus den übergebenen Parametern eine SQL-Query und sendet die Abfrage an die Datenbank.
 Die Antwort vom Datenbankserver wird daraufhin in ein JSON-Object umgewandelt und an den vorher genannten fetch Befehl weitergereicht.</p>
+</div>
+<div class="paragraph">
+<p>Auf Erhalt des Json-Object&#8217;s wird dieser an die <strong>generate_table()</strong> weitergereicht, die dann aus den erhaltenen Werten eine Tabelle generiert und in die Seite einfügt.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code data-lang="javascript">function generate_table(json) {
+
+    let body = document.getElementsByTagName("body")[0];
+
+    // If table exists -&gt; Delete | Same with InfoBox
+    let tDelete = document.getElementById("datatable");
+    tDelete != null ? tDelete.parentNode.removeChild(tDelete) : null
+    let iBDelete = document.getElementById('i-box');
+    iBDelete != null ? iBDelete.parentNode.removeChild(iBDelete):null;
+
+    if (json.length === 0){
+        let infoBox = document.createElement('div');
+        infoBox.setAttribute('id', 'i-box');
+        infoBox.appendChild(document.createTextNode("Nichts gefunden"));
+        body.appendChild(infoBox);
+        infoBox.classList.add('zoomed');
+        requestAnimationFrame(() =&gt; {
+            infoBox.classList.remove('zoomed')
+        })
+    }
+
+    // Table
+    let table = document.createElement("table");
+    table.setAttribute("id", "datatable")
+    table.setAttribute("class", "styled-table")
+    table.classList.add('zoomed');
+
+    // Table Header
+    let thead = table.createTHead();
+    let row = thead.insertRow();
+    for (let jsonElementKey in json[0]) {
+        let cell = row.insertCell();
+        cell.appendChild(document.createTextNode((jsonElementKey[0].toUpperCase() + jsonElementKey.substring(1))
+            .replace("_", "-")))
+    }
+
+    // Table Data
+    let tbody = table.createTBody();
+
+    json.forEach(obj =&gt; {
+        let row = tbody.insertRow();
+        Object.entries(obj).forEach(([key, value]) =&gt; {
+            let cell = row.insertCell();
+            cell.appendChild(document.createTextNode(value.toString()));
+        })
+    });
+    body.appendChild(table);
+    requestAnimationFrame(() =&gt; {
+       table.classList.remove('zoomed')
+    });
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_ausblick_auf_mögliche_erweiterungen_2">2.2.8. Ausblick auf mögliche Erweiterungen</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Zusätzliche Informationen<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Beim Klicken auf einen Auftrag, sollen zusätzliche Informationen auftauchen.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Weitere Suchkategorien</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Es soll die Möglichkeit bestehen, weitere Kategorien wie z.B. Kunden zu suchen.</p>
+</li>
+<li>
+<p>Das könnte durch ein Anmeldefeld vor unerlaubtem Zugang geschützt werden.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -910,7 +995,7 @@ Die Antwort vom Datenbankserver wird daraufhin in ein JSON-Object umgewandelt un
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-08 19:03:12 +0200
+Last updated 2022-07-09 12:33:43 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
