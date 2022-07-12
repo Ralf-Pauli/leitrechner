@@ -119,9 +119,9 @@ let query = "SELECT id, produkt_id, produkt_anzahl, status FROM Auftrag";
     });
 }
 ----
-Beim Versuch die Variable auszulesen wird die function *getData()* ausgeführt.
+Beim Versuch, die Variable auszulesen, wird die function *getData()* ausgeführt.
 Diese baut aus den übergebenen Parametern eine SQL-Query und sendet die Abfrage an die Datenbank.
-Die Antwort vom Datenbankserver wird daraufhin in ein JSON-Object umgewandelt und an den vorher genannten fetch Befehl weitergereicht.
+Die Antwort vom Datenbankserver, wird daraufhin in ein JSON-Object umgewandelt und an den vorher genannten fetch Befehl weitergereicht.
 
 Auf Erhalt des Json-Object's wird dieser an die *generate_table()* weitergereicht, die dann aus den erhaltenen Werten eine Tabelle generiert und in die Seite einfügt.
 [source, javascript]
