@@ -4,33 +4,30 @@
 .Übersicht Carlos
 image::uebersicht.png[alt=Überischt, width=80%, float="right"] 
 Der Webservice speichert die Aufträge, die vom *JavaFX Client*, der *Android App* und der *Webpage* gesendet werden und speichert diese in der Datenbank. +
-Man holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.
-
+Der Leitrechner holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.
 
 === Umsetztung
-Wir haben uns entschieden die Leitrechner Kommunikation durch Sockets umzusetzen. Der Grund https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html[Sockets] zu verwenden ist das eine Gruppe sich im vorherigen Projekt schon mit Sockets auseinandergesetzt hat und dies den Recherche Zeitraum stark verringert. 
-
+Wir haben uns entschieden, die Leitrechner Kommunikation durch Sockets umzusetzen. Eine vorliegende Projektdokumentation war ein Entscheidungsgrund für https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html[Sockets].
 
 ===  Programmiersprache/Entwicklungsumgebung
-Es wird die Programmiersprache https://www.java.com/de/[Java] in der Version 1.8 und die Java-IDE https://www.jetbrains.com/de-de/idea/[IntelliJ] von https://www.jetbrains.com/de-de/[JetBrains] verwendet, um das Projekt zu verwirklichen.
+Es wird die Programmiersprache https://www.java.com/de/[Java] der Version 1.8 und die https://www.jetbrains.com/de-de/[JetBrains] Java-IDE https://www.jetbrains.com/de-de/idea/[IntelliJ] verwendet, um das Projekt zu verwirklichen.
 
 === Verwendete Bibliotheken/Frameworks
-Es wird die Libraries java.net.Socket und https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html[java.net.ServerSocket] für die Kommunikation zwischen Client und Server verwendet.  
+Es werden die Libraries https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html[java.net.Socket] und https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html[java.net.ServerSocket] für die Kommunikation zwischen Client und Server verwendet.  
 
 === Verwendete Schnittstellen im Projekt
 - Datenbanksystem:
 +
 Man verwendet eine https://www.mysql.com/de/[MySQL] Datenbank, die auf http://devel1/phpmyadmin/[Devel1] erreichbar ist.
-Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigt man nur die Aufträge und Produkte.
+Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigt der Leitrechner nur die Tabellen Auftrag und Produkt.
 
 - Fertigungsstraße
 +
 Man verbindet sich über eine Socket Verbindung zu der Fertigungsstraße. Man macht dies, um Daten aus der Datenbank zu holen und diese an die Fertigungsstraße weiterzuleiten.
 
-
 === Ablauf 
 
-. Es wird eine Verbindung zum Socket Client aufgebaut. 
+. Zuerst wird eine Verbindung zum Socket-Client aufgebaut. 
 +
 [source, java]
 ----
@@ -81,12 +78,9 @@ while (!stop) {
     output.println(orderMsg);
 ----
 
-
 === Database Manager
-Man benutzt die https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html[Java SQL Libary] für den Zugriff auf die MySql Datenank. 
-Man benutzt die Java SQL Libary für den Zugriff auf die MySQL Datenbank. In der Database Manager Klasse hat man eine getNewAuftraege Methode erstellt, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt. +
-Damit der Status des Auftrags nach der Produktion geändert werden kann haben wir die setStatus Methode erstellt, welche ein Update durchführt, um den Status an der entsprechenden Id änder
-
+Man benutzt die https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html[Java SQL Libary] für den Zugriff auf die MySQL Datenank. In der Database Manager Klasse hat man eine getNewAuftraege Methode erstellt, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt. +
+Damit der Status des Auftrags nach der Produktion geändert werden kann, haben wir die setStatus Methode erstellt, welche ein Update durchführt, um den Status an der entsprechenden Id zu ändern.
 
 === Probleme
 * Beim Start des Programms, wird um die Kommunikation zu starten ein "begin" vom Client zum Server gesendet. Allerdings ist hinter dem "begin" kein Auftrag hinterlegt, deshalb soll auch nichts in der Datenbank aktualisiert werden und es soll auch kein Element aus der Auftrag Liste entfernt werden. +
@@ -116,4 +110,8 @@ Das Programm könnte bereits im aktuellen Entwicklungsstadium verwendet werden. 
 
 * *Eine Graphische Anwendung* +
  Momentan wird die ganze Kommunikation in der Konsole dargestellt, um dies Benutzerfreundlicher zu machen hatte man die Idee eine GUI zur Steurung, Überprüfung und Testung der Daten zu erstellen. +
- Mögliche Funktionen währen das Starten und Stoppen des Servers und das Anzeigen der Kommunikation mit Zeitstempel in einer Tabelle.
+ Mögliche Funktionen währen das Starten und Stoppen des Servers und das Anzeigen der Kommunikation mit Zeitstempel in einer Tabelle. +
+
+* *Logen von Ereignissen* +
+Zum jetzigen Standpunkt hat man nach Programmschluss keine Information darüber, was während der Laufzeit geschehen ist. Deshalb wäre es vorteilhaft, eine Log-Funktion zu implementieren. +
+Dadurch kann auch nach Beendung des Programms, nachgeschaut werden, was zur Laufzeit geschehen ist.
