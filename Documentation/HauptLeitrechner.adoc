@@ -51,4 +51,6 @@ include::Webapp.adoc[leveloffset=+1]
 https://www.baeldung.com/a-guide-to-java-sockets[A Guide to Java Sockets] +
 https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html[Oracle Doku ServerSocket] +
 http://devel1/projekte/BFS2020FI/sockets[Socket Doku Heigl/Frank] +
-https://zetcode.com/db/mysqljava/[MySQL Java]
+https://zetcode.com/db/mysqljava/[MySQL Java] +
+https://pugjs.org/api/getting-started.html[Pug Docs] +
+https://nodejs.org/de/docs/[NodeJS Docs] +

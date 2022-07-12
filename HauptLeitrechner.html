@@ -561,24 +561,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="paragraph">
 <p>Der Webservice speichert die Aufträge, die vom <strong>JavaFX Client</strong>, der <strong>Android App</strong> und der <strong>Webpage</strong> gesendet werden und speichert diese in der Datenbank.<br>
-Man holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.</p>
+Der Leitrechner holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an die Fertigungsstraße. Sobald der Auftrag dort verarbeitet wurde, kriegt man eine Rückmeldung und ändert den Status des Auftrags in der Datenbank.</p>
 </div>
 <div class="sect3">
 <h4 id="_umsetztung">2.1.1. Umsetztung</h4>
 <div class="paragraph">
-<p>Wir haben uns entschieden die Leitrechner Kommunikation durch Sockets umzusetzen. Der Grund <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">Sockets</a> zu verwenden ist das eine Gruppe sich im vorherigen Projekt schon mit Sockets auseinandergesetzt hat und dies den Recherche Zeitraum stark verringert.</p>
+<p>Wir haben uns entschieden, die Leitrechner Kommunikation durch Sockets umzusetzen. Eine vorliegende Projektdokumentation war ein Entscheidungsgrund für <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">Sockets</a>.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_programmierspracheentwicklungsumgebung">2.1.2. Programmiersprache/Entwicklungsumgebung</h4>
 <div class="paragraph">
-<p>Es wird die Programmiersprache <a href="https://www.java.com/de/">Java</a> in der Version 1.8 und die Java-IDE <a href="https://www.jetbrains.com/de-de/idea/">IntelliJ</a> von <a href="https://www.jetbrains.com/de-de/">JetBrains</a> verwendet, um das Projekt zu verwirklichen.</p>
+<p>Es wird die Programmiersprache <a href="https://www.java.com/de/">Java</a> der Version 1.8 und die <a href="https://www.jetbrains.com/de-de/">JetBrains</a> Java-IDE <a href="https://www.jetbrains.com/de-de/idea/">IntelliJ</a> verwendet, um das Projekt zu verwirklichen.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_verwendete_bibliothekenframeworks">2.1.3. Verwendete Bibliotheken/Frameworks</h4>
 <div class="paragraph">
-<p>Es wird die Libraries java.net.Socket und <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">java.net.ServerSocket</a> für die Kommunikation zwischen Client und Server verwendet.</p>
+<p>Es werden die Libraries <a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">java.net.Socket</a> und <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">java.net.ServerSocket</a> für die Kommunikation zwischen Client und Server verwendet.</p>
 </div>
 </div>
 <div class="sect3">
@@ -589,7 +589,7 @@ Man holt alle noch offenen Aufträge aus der Datenbank und sendet diese dann an 
 <p>Datenbanksystem:</p>
 <div class="paragraph">
 <p>Man verwendet eine <a href="https://www.mysql.com/de/">MySQL</a> Datenbank, die auf <a href="http://devel1/phpmyadmin/">Devel1</a> erreichbar ist.
-Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigt man nur die Aufträge und Produkte.</p>
+Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benötigt der Leitrechner nur die Tabellen Auftrag und Produkt.</p>
 </div>
 </li>
 <li>
@@ -606,7 +606,7 @@ Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benöti
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Es wird eine Verbindung zum Socket Client aufgebaut.</p>
+<p>Zuerst wird eine Verbindung zum Socket-Client aufgebaut.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code data-lang="java">public static void openConnection() {
@@ -666,9 +666,8 @@ Es werden Aufträge, Produkte, Adressen und User gespeichert, allerdings benöti
 <div class="sect3">
 <h4 id="_database_manager">2.1.6. Database Manager</h4>
 <div class="paragraph">
-<p>Man benutzt die <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html">Java SQL Libary</a> für den Zugriff auf die MySql Datenank.
-Man benutzt die Java SQL Libary für den Zugriff auf die MySQL Datenbank. In der Database Manager Klasse hat man eine getNewAuftraege Methode erstellt, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt.<br>
-Damit der Status des Auftrags nach der Produktion geändert werden kann haben wir die setStatus Methode erstellt, welche ein Update durchführt, um den Status an der entsprechenden Id änder</p>
+<p>Man benutzt die <a href="https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html">Java SQL Libary</a> für den Zugriff auf die MySQL Datenank. In der Database Manager Klasse hat man eine getNewAuftraege Methode erstellt, welche alle noch offenen Aufträge ab einem übergebenen Datum aus der Datenbank holt.<br>
+Damit der Status des Auftrags nach der Produktion geändert werden kann, haben wir die setStatus Methode erstellt, welche ein Update durchführt, um den Status an der entsprechenden Id zu ändern.</p>
 </div>
 </div>
 <div class="sect3">
@@ -711,7 +710,12 @@ Gelöst wurde dies indem wir eienen weiteren if-Fall hinzugefügt haben der scha
 <li>
 <p><strong>Eine Graphische Anwendung</strong><br>
 Momentan wird die ganze Kommunikation in der Konsole dargestellt, um dies Benutzerfreundlicher zu machen hatte man die Idee eine GUI zur Steurung, Überprüfung und Testung der Daten zu erstellen.<br>
-Mögliche Funktionen währen das Starten und Stoppen des Servers und das Anzeigen der Kommunikation mit Zeitstempel in einer Tabelle.</p>
+Mögliche Funktionen währen das Starten und Stoppen des Servers und das Anzeigen der Kommunikation mit Zeitstempel in einer Tabelle.<br></p>
+</li>
+<li>
+<p><strong>Logen von Ereignissen</strong><br>
+Zum jetzigen Standpunkt hat man nach Programmschluss keine Information darüber, was während der Laufzeit geschehen ist. Deshalb wäre es vorteilhaft, eine Log-Funktion zu implementieren.<br>
+Dadurch kann auch nach Beendung des Programms, nachgeschaut werden, was zur Laufzeit geschehen ist.</p>
 </li>
 </ul>
 </div>
@@ -987,7 +991,9 @@ Die Antwort vom Datenbankserver, wird daraufhin in ein JSON-Object umgewandelt u
 <p><a href="https://www.baeldung.com/a-guide-to-java-sockets">A Guide to Java Sockets</a><br>
 <a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">Oracle Doku ServerSocket</a><br>
 <a href="http://devel1/projekte/BFS2020FI/sockets">Socket Doku Heigl/Frank</a><br>
-<a href="https://zetcode.com/db/mysqljava/">MySQL Java</a></p>
+<a href="https://zetcode.com/db/mysqljava/">MySQL Java</a><br>
+<a href="https://pugjs.org/api/getting-started.html">Pug Docs</a><br>
+<a href="https://nodejs.org/de/docs/">NodeJS Docs</a><br></p>
 </div>
 </div>
 </div>
@@ -995,7 +1001,7 @@ Die Antwort vom Datenbankserver, wird daraufhin in ein JSON-Object umgewandelt u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-07-12 18:55:57 +0200
+Last updated 2022-07-12 19:04:20 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
