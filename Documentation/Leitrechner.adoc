@@ -41,7 +41,7 @@ public static void openConnection() {
 }
 ----
 +
-. Der Server wartet auf ein "begin" vom Client und sendet dann den nächsten offenen Auftrag (siehe <<Database Manager>>) über die Socket Verbindung (*output.println()*) an den Client.
+. Der Server wartet auf ein "bereit" vom Client und sendet dann den nächsten offenen Auftrag (siehe <<Database Manager>>) über die Socket Verbindung (*output.println()*) an den Client.
 +
 [source, java]
 ----
@@ -89,9 +89,9 @@ Damit der Status des Auftrags nach der Produktion geändert werden kann haben wi
 
 
 === Probleme
-* Beim Start des Programms, wird um die Kommunikation zu starten ein "begin" vom Client zum Server gesendet. Allerdings ist hinter dem "begin" kein Auftrag hinterlegt, deshalb soll auch nichts in der Datenbank aktualisiert werden und es soll auch kein Element aus der Auftrag Liste entfernt werden. +
+* Beim Start des Programms, wird um die Kommunikation zu starten ein "bereit" vom Client zum Server gesendet. Allerdings ist hinter dem "bereit" kein Auftrag hinterlegt, deshalb soll auch nichts in der Datenbank aktualisiert werden und es soll auch kein Element aus der Auftrag Liste entfernt werden. +
 Man hatte das Problem das der erste Auftrag schon auf "fertig" gesetzt wurde, bevor er durch die Fertigungsstraße gelaufen ist. +
-Gelöst wurde dies indem wir eienen weiteren if-Fall hinzugefügt haben der schaut ob die Nachricht vom Client nur "begin" enthällt und keine Auftragsnummmer.
+Gelöst wurde dies indem wir eienen weiteren if-Fall hinzugefügt haben der schaut ob die Nachricht vom Client nur "bereit" enthällt und keine Auftragsnummmer.
 +
 [source, java]
 ----
