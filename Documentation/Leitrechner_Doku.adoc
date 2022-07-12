@@ -9,7 +9,7 @@
 :toc-title: Inhaltsverzeichnis
 :sectnums:
 :sectnumlevels: 10
-:imagesdir: .\images
+:imagesdir: .\Documentation\images
 :figure-caption: Abbildung
 :table-caption: Tabelle
 :app-name: Leitrechner Dokumentation
